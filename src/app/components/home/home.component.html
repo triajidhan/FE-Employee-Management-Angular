@@ -79,11 +79,14 @@
                 <div class="div-nav-profile-container">
                     <div class="div-nav-profile-content">
                         <img src="../../../assets/images/profile.png" alt="Profile Image">
-                        <i class="i-icon i-icon-profile icon-caret-down"></i>
+                        <i class="i-icon i-icon-profile icon-caret-down" (click)="toggleProfile()"></i>
                     </div>
-                    <div class="div-nav-profile-dropdown">
-
-                    </div>
+                    @if (_booleanToggleProfile)
+                    {
+                        <div class="div-nav-profile-dropdown">
+                            <p (click)="signOut()">Sign Out</p>
+                        </div>
+                    }
                 </div>
             </div>
         </section>

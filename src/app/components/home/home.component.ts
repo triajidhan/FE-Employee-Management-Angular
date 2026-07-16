@@ -30,6 +30,7 @@ export class HomeComponent {
     //#region DECLARATION
 
     public _booleanToggleNavigation: boolean;
+    public _booleanToggleProfile: boolean;
     public _arrayMenu: Array<Menu>;
 
     private _stringActiveRoute: string;
@@ -39,8 +40,9 @@ export class HomeComponent {
 
     //#region CONSTRUCTOR
 
-    public constructor(private _router: Router) {
+    public constructor(private router: Router) {
         this._booleanToggleNavigation = true;
+        this._booleanToggleProfile = false;
         this._stringActiveRoute = "dashboard";
         this._arrayMenu = this.setArrayMenu();
     }
@@ -90,13 +92,17 @@ export class HomeComponent {
         this._booleanToggleNavigation = !this._booleanToggleNavigation;
     }
 
+    public toggleProfile(): void {
+        this._booleanToggleProfile = !this._booleanToggleProfile;
+    }
+
     public clickMenuList(stringMenuTitle?: string): void {
         for (const menu of this._arrayMenu) {
             if (menu.title === stringMenuTitle) {
                 menu.open = !menu.open;
 
                 if (menu.route && !menu.arraySubMenu) {
-                    this._router.navigate(["home", menu.route]);
+                    this.router.navigate(["home", menu.route]);
                 }
             }
             else {
@@ -120,12 +126,23 @@ export class HomeComponent {
                             if (subMenu.route) {
                                 arrayStringRoute.push(subMenu.route);
                             }
-                            this._router.navigate(arrayStringRoute);
+                            this.router.navigate(arrayStringRoute);
                         }
                     }
                 }
             }
         }
+    }
+
+    //#endregion
+
+
+    //#region NAVIGATION
+
+    public signOut(): void
+    {
+        alert("Anda berhasil Sign Out!");
+        this.router.navigate(["/signin"]);
     }
 
     //#endregion
