@@ -1,0 +1,23 @@
+<div class="div-table-footer">
+    <div class="div-table-left-footer">
+        <p class="p-table-information">Showing 1-10 of 14 data</p>
+    </div>
+    <div class="div-table-right-footer">
+        <button
+            class="button-general button-process button-light icon-caret-left"
+            type="button" [ngClass]="{'button-light': !_arrayNavButton[0].active}">
+        </button>
+        @for (navButton of _arrayNavButton; track $index)
+        {
+            <button
+                class="button-general button-process button-light button-nav-table"
+                type="button" [ngClass]="{'button-light': !navButton.active}">
+                {{ navButton.number }}
+            </button>
+        }
+        <button
+            class="button-general button-process icon-caret-right"
+            type="button" [ngClass]="{'button-light': !_arrayNavButton[_arrayNavButton.length - 1].active}">
+        </button>
+    </div>
+</div>

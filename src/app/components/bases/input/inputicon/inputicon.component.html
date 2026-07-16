@@ -1,0 +1,10 @@
+<div class="div-input-icon-container">
+    <i class="i-icon i-icon-input {{ icon }}"
+        [ngClass]="{'i-icon-input-left': position === 'left'}"></i>
+    <input  class="input-general" type="text"
+        [value]="_stringValue"
+        (input)="onInputChange($event)"
+        [disabled]="disabled"
+        [readonly]="readonly"
+        [placeholder]="placeholder">
+</div>

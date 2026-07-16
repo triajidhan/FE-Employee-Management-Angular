@@ -1,0 +1,52 @@
+/* IMPORT - START */
+
+@import ../scss/initialization-general
+
+/* IMPORT - END */
+
+
+/* FONT FACE - START  */
+
+@each $type, $fonts in $font-families
+    @each $class, $source in $fonts
+        @font-face
+            font-family: $class
+            src: url($path-font + $type + "/" + $source + ".ttf")       
+
+/* FONT FACE - END  */
+
+
+/* FONT FAMILY - START  */
+
+body
+    font-family: poppins-regular, sans-serif
+    aside
+        nav
+            font-family: poppins-medium, sans-serif
+    main
+        font-family: poppins-regular, sans-serif
+
+button
+    font-family: poppins-medium, sans-serif
+
+label.label-input
+    font-family: poppins-medium, sans-serif
+
+input,
+textarea,
+select
+    font-family: poppins-regular, sans-serif
+
+mat-form-field
+    div.mat-mdc-text-field-wrapper
+        div.mat-mdc-form-field-flex
+            div.mat-mdc-form-field-infix
+                input.mat-mdc-input-element
+                    font-family: poppins-regular, sans-serif
+            mat-date-range-input
+                div.mat-date-range-input-container
+                    div.mat-date-range-input-wrapper
+                        input.mat-date-range-input-inner
+                            font-family: poppins-regular, sans-serif
+
+/* FONT FAMILY - END  */

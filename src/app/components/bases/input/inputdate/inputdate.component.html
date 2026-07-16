@@ -1,0 +1,17 @@
+<mat-form-field
+    (click)="disabled ? undefined : picker.open()"
+    [ngClass]="{'mat-form-field-disabled-custom': disabled}">
+    <input matInput
+        [readonly]="!readonly"
+        [disabled]="readonly"
+        [matDatepicker]="picker"
+        [placeholder]="placeholder"
+        [(ngModel)]="date"
+        (ngModelChange)="onDateChange($event)">
+    <mat-datepicker-toggle matIconSuffix
+        [for]="picker">
+    </mat-datepicker-toggle>
+    <mat-datepicker #picker
+        [disabled]="disabled || readonly">
+    </mat-datepicker>
+</mat-form-field>

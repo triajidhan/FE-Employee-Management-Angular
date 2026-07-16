@@ -1,0 +1,111 @@
+/* IMPORT - START */
+
+@import ../scss/initialization-general
+
+/* IMPORT - END */
+
+
+/* FUNCTION - START */
+
+@function custom-position($value)
+    $positions: ( top: ($value, $space-none, $space-none, $space-none), right: ($space-none, $value, $space-none, $space-none), bottom: ($space-none, $space-none, $value, $space-none), left: ($space-none, $space-none, $space-none, $value))
+    @return $positions
+
+/* FUNCTION - END */
+
+
+/* MIXIN - START */
+
+@mixin border-radius($radius)
+    -webkit-border-radius: $radius
+    -moz-border-radius: $radius
+    -ms-border-radius: $radius
+    border-radius: $radius
+
+@mixin custom-border-radius($radius, $position)
+    $positions: custom-position($radius)
+    $sides: map-get($positions, $position)
+
+    -webkit-border-radius: nth($sides, 1) nth($sides, 2) nth($sides, 3) nth($sides, 4)
+    -moz-border-radius: nth($sides, 1) nth($sides, 2) nth($sides, 3) nth($sides, 4)
+    -ms-border-radius: nth($sides, 1) nth($sides, 2) nth($sides, 3) nth($sides, 4)
+    border-radius: nth($sides, 1) nth($sides, 2) nth($sides, 3) nth($sides, 4)
+
+@mixin box-shadow($offset-x, $offset-y, $blur-radius, $spread-radius, $color, $INSET: $boolean-false)
+    @if $INSET
+        -webkit-box-shadow: inset $offset-x $offset-y $blur-radius $spread-radius $color
+        -moz-box-shadow: inset $offset-x $offset-y $blur-radius $spread-radius $color
+        -ms-box-shadow: inset $offset-x $offset-y $blur-radius $spread-radius $color
+        box-shadow: inset $offset-x $offset-y $blur-radius $spread-radius $color
+    @else 
+        -webkit-box-shadow: $offset-x $offset-y $blur-radius $spread-radius $color
+        -moz-box-shadow: $offset-x $offset-y $blur-radius $spread-radius $color
+        -ms-box-shadow: $offset-x $offset-y $blur-radius $spread-radius $color
+        box-shadow: $offset-x $offset-y $blur-radius $spread-radius $color
+
+@mixin scrollbar-color($scrollbar-color)
+    ::-webkit-scrollbar
+        background-color: $scrollbar-color
+    ::-moz-scrollbar
+        background-color: $scrollbar-color
+    ::-ms-scrollbar
+        background-color: $scrollbar-color
+    ::-o-scrollbar
+        background-color: $scrollbar-color
+
+@mixin scrollbar-visibility($scrollbar-visibility)
+    ::-webkit-scrollbar
+        visibility: $scrollbar-visibility
+    ::-moz-scrollbar
+        visibility: $scrollbar-visibility
+    ::-ms-scrollbar
+        visibility: $scrollbar-visibility
+    ::-o-scrollbar
+        visibility: $scrollbar-visibility
+
+@mixin scrollbar-size($scrollbar-width, $scrollbar-height)
+    ::-webkit-scrollbar
+        width: $scrollbar-width
+        height: $scrollbar-height
+    ::-moz-scrollbar
+        width: $scrollbar-width
+        height: $scrollbar-height
+    ::-ms-scrollbar
+        width: $scrollbar-width
+        height: $scrollbar-height
+    ::-o-scrollbar
+        width: $scrollbar-width
+        height: $scrollbar-height
+
+@mixin scrollbar-thumb-color($scrollbar-thumb-color)
+    ::-webkit-scrollbar-thumb
+        background-color: $scrollbar-thumb-color
+    ::-moz-scrollbar-thumb
+        background-color: $scrollbar-thumb-color
+    ::-ms-scrollbar-thumb
+        background-color: $scrollbar-thumb-color
+    ::-o-scrollbar-thumb
+        background-color: $scrollbar-thumb-color
+
+@mixin scrollbar-thumb-visibility($scrollbar-thumb-visibility)
+    ::-webkit-scrollbar-thumb
+        visibility: $scrollbar-thumb-visibility
+    ::-moz-scrollbar-thumb
+        visibility: $scrollbar-thumb-visibility
+    ::-ms-scrollbar-thumb
+        visibility: $scrollbar-thumb-visibility
+    ::-o-scrollbar-thumb
+        visibility: $scrollbar-thumb-visibility
+    
+@mixin scrollbar-thumb-border-radius($radius)
+    ::-webkit-scrollbar-thumb
+        border-radius: $radius
+    ::-moz-scrollbar-thumb
+        border-radius: $radius
+    ::-ms-scrollbar-thumb
+        border-radius: $radius
+    ::-o-scrollbar-thumb
+        border-radius: $radius
+    
+
+/* MIXIN - END */

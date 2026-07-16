@@ -1,0 +1,70 @@
+/* IMPORT - START */
+
+@import ../scss/initialization-general
+
+/* IMPORT - END */
+    
+
+/* GENERAL - START */
+
+li
+    list-style: none
+
+h2
+    margin-bottom: 20px
+
+h3
+    margin-bottom: 15px
+
+img
+    display: block
+    object-fit: cover
+
+/* GENERAL - END */
+
+
+/* ICON - START */
+
+i.i-icon
+    display: block
+    mask-size: contain
+    mask-repeat: no-repeat
+    mask-position: center
+    transition: transform 0.25s
+    background-color: #495057
+
+@each $class, $source in $icons
+    i.icon-#{$class}
+       @include icon-mask($source)
+
+i.i-nav-icon
+    width: 17.5px
+    height: 17.5px
+
+i.i-icon-profile
+    width: 20px
+    height: 20px
+
+i.i-toggle-navigation-icon
+    width: 25px
+    height: 25px
+    &:hover
+        transform: perspective(80px) rotateY(-25deg)
+
+i.i-list-icon
+    width: 40px
+    height: 40px
+
+i.i-table-status-icon
+    width: 10px
+    height: 10px
+
+i.i-icon-input
+    width: 20px
+    height: 20px
+
+i.i-rotate-icon-180
+    transform: rotate(180deg)
+
+/* ICON - END */
+

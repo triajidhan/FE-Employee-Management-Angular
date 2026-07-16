@@ -1,0 +1,72 @@
+/* IMPORT - START */
+
+@import ../scss/initialization-general
+
+/* IMPORT - END */
+
+
+/* GENERAL - START */
+
+button.button-general
+    cursor: pointer
+    font-size: 14px
+    padding: 8.3px $space-considerable
+    border-radius: $space-petite
+    border: none
+    min-width: 100px
+    height: 39px
+    &:empty
+        min-width: $space-none
+    &:disabled
+        cursor: auto
+
+button.button-general.button-rounded
+    border-radius: 20px
+    
+button.button-general.button-small
+    font-size: 12px
+    padding: 6.5px 10px
+    min-width: 80px
+
+button.button-general.button-large
+    font-size: 16px
+    padding: 9px 20px
+    min-width: 120px
+
+@mixin button-icon
+    display: flex
+    min-width: 120px
+    align-items: center
+    gap: 12px
+    &:empty
+        min-width: $space-none
+        padding: $space-moderate $space-average
+
+@each $class, $source in $icons
+    button.button-general.icon-#{$class}
+        @include button-icon
+    button.button-general.button-right-icon.icon-#{$class}
+        justify-content: space-between
+    button.button-general.icon-#{$class}::before,
+    button.button-general.button-right-icon.icon-#{$class}::after
+        content: ''
+        display: block
+        mask-size: contain
+        mask-repeat: no-repeat
+        mask-position: center
+        width: $space-considerable
+        height: $space-considerable
+        background-color: currentColor
+        @include icon-mask($source)
+    button.button-general.button-right-icon.icon-#{$class}::before
+        display: none
+
+/* GENERAL - START */
+
+
+/* TABLE - START */
+
+button.button-nav-table
+    min-width: 40px
+
+/* TABLE - END */

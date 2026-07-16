@@ -1,0 +1,248 @@
+/* IMPORT - START */
+
+@import ../scss/initialization-general
+@import vendor-prefix-general
+
+/* IMPORT - END */
+
+
+/* color - START  */
+
+$color-blue: #0d6efd
+$color-indigo: #6610f2
+$color-purple: #6f42c1
+$color-pink: #d63384
+$color-red: #dc3545
+$color-orange: #fd7e14
+$color-yellow: #ffc107
+$color-green: #198754
+$color-teal: #20c997
+$color-cyan: #0dcaf0
+
+$color-white: #ffffff
+$color-gray-100: #f8f9fa
+$color-gray-200: #e9ecef
+$color-gray-300: #dee2e6
+$color-gray-400: #ced4da
+$color-gray-500: #adb5bd
+$color-gray-600: #6c757d
+$color-gray-700: #495057
+$color-gray-800: #343a40
+$color-gray-900: #212529
+$color-black: #000000
+
+/* color - END  */
+
+
+/* theme - START  */
+
+$theme-primary: $color-blue
+$theme-secondary: $color-gray-600
+$theme-success: $color-green
+$theme-info: $color-cyan
+$theme-warning: $color-yellow
+$theme-danger: $color-red
+
+$theme-light-background: $color-gray-200
+$theme-light-background-secondary: $color-gray-100
+$theme-light-color: $color-gray-700
+$theme-light-shadow: $color-gray-600
+$theme-light-scrollbar-thumb: $color-gray-400
+
+$theme-dark-background: $color-gray-800
+$theme-dark-background-secondary: $color-gray-900
+$theme-dark-color: $color-gray-300
+$theme-dark-shadow: $color-gray-400
+$theme-dark-scrollbar-thumb: $color-gray-600
+
+/* theme - END  */
+
+
+/* GENERAL - START  */
+
+@mixin light-card-box-shadow
+    @include box-shadow(0px, 0px, 5px, 1px, $color-gray-400)
+
+@mixin light-card-inset-box-shadow
+    @include box-shadow(0px, 0px, 5px, 1px, $color-gray-400, true)
+
+@mixin dark-card-box-shadow
+    @include box-shadow(0px, 0px, 5px, 1px, $color-gray-600)
+
+@mixin dark-card-inset-box-shadow
+    @include box-shadow(0px, 0px, 5px, 1px, $color-gray-600, true)
+
+/* GENERAL - END  */
+
+
+/* light theme - START  */
+
+@mixin light-theme
+    background-color: $theme-light-background-secondary
+    color: $theme-light-color
+    @include scrollbar-color($theme-light-background-secondary)
+    @include scrollbar-thumb-color($theme-light-scrollbar-thumb)
+    aside
+        z-index: 1
+        background-color: $theme-light-background-secondary
+        @include light-card-box-shadow
+        nav
+            i.i-nav-icon
+                background-color: $theme-light-color
+            
+    main
+        background-color: $theme-light-background
+
+/* light theme - END  */
+
+
+/* dark theme - START  */
+
+@mixin dark-theme
+    background-color: $theme-dark-background
+    color: $theme-dark-color
+
+/* dark theme - START  */
+
+
+/* DEFAULT theme - START  */
+
+body
+    @include light-theme
+
+/* DEFAULT theme - END  */
+
+
+/* BUTTON - START  */
+
+@mixin button-theme($color, $background-color, $active-background-color, $boolean-outline: $boolean-false)
+    color: $color
+    background-color: $background-color
+    &:active
+        background-color: $active-background-color
+    @if $boolean-outline
+        border: 1px solid $active-background-color
+
+button.button-general
+    color: $theme-light-color
+    background-color: #fff
+    box-shadow: 0 0 2px 1px #adb5bd
+    transition: box-shadow 0.15s
+    transition: background-color 0.15s
+    &:hover
+        box-shadow: 0 1px 5px 1px #adb5bd
+    &:active
+        box-shadow: none
+        background-color: #e6e9ed
+
+@each $type, $theme in $button-theme
+    @if $type == disabled
+        button.button-general
+            &:disabled
+                @include box-shadow($space-none, $space-none, $space-thin, $space-tiny, #adb5bd)
+                @include button-theme(map-get($theme, text-color), map-get($theme, background-color), map-get($theme, background-color))
+        button.button-general.button-light
+            &:disabled
+                @include box-shadow($space-none, $space-none, $space-thin, $space-tiny, #adb5bd)
+                @include button-theme(map-get($theme, light-text-color), map-get($theme, light-background-color), map-get($theme, light-background-color))
+        button.button-general.button-outline
+            &:disabled
+                @include box-shadow($space-none, $space-none, $space-thin, $space-tiny, #adb5bd)
+                @include button-theme(map-get($theme, outline-text-color), map-get($theme, outline-background-color), map-get($theme, outline-background-color))
+    @else 
+        button.button-general.button-#{$type}
+            @include button-theme(map-get($theme, text-color), map-get($theme, background-color), map-get($theme, active-background-color))
+        button.button-general.button-light.button-#{$type}
+            @include button-theme(map-get($theme, light-text-color), map-get($theme, light-background-color), map-get($theme, light-active-background-color))
+        button.button-general.button-outline.button-#{$type}
+            @include button-theme(map-get($theme, outline-text-color), map-get($theme, outline-background-color), map-get($theme, outline-active-background-color), $boolean-true)
+
+/* BUTTON - END  */
+
+
+/* INPUT - START  */
+
+input.input-general,
+textarea.textarea-general,
+mat-form-field div.mat-mdc-text-field-wrapper
+    color: $theme-light-color
+    background-color: $color-gray-200
+    box-shadow: inset 0 0 2px 1px #adb5bd
+    transition: box-shadow 0.15s
+    transition: background-color 0.15s
+    &:hover
+        background-color: $color-gray-200
+        box-shadow: inset 0 0 1px 1px #adb5bd
+    &:active
+        box-shadow: none
+        border: none
+        outline: none
+        background-color: $color-gray-200
+    &:focus
+        border: none
+        outline: none
+        background-color: #e6e9ed
+    &:read-only
+        background-color: #fff
+        &:active
+            box-shadow: inset 0 0 2px 1px #adb5bd
+    &:disabled
+        box-shadow: none
+        background-color: $color-gray-300
+        &:active
+            box-shadow: none
+
+select.select-general
+    color: $theme-light-color
+    background-color: $color-gray-200
+    box-shadow: inset 0 0 2px 1px #adb5bd
+    transition: box-shadow 0.15s
+    transition: background-color 0.15s
+    outline: none
+    
+
+mat-form-field
+    div.mdc-text-field--filled:not(.mdc-text-field--disabled)
+        background-color: $color-gray-200
+        &:hover
+            background-color: $color-gray-200
+    div.mat-mdc-text-field-wrapper
+        div.mat-mdc-form-field-flex
+            div.mat-mdc-form-field-infix
+                input.mat-mdc-input-element
+                    color: $theme-light-color
+                mat-date-range-input
+                    div.mat-date-range-input-container
+                        div.mat-date-range-input-wrapper
+                            input.mat-date-range-input-inner
+                                color: $theme-light-color
+
+mat-form-field.mat-form-field-disabled-custom
+    div.mat-mdc-text-field-wrapper
+        background-color: $color-gray-300
+        box-shadow: none
+        &:hover
+            background-color: $color-gray-300
+        &:active
+            box-shadow: none
+
+
+/* INPUT - END  */
+
+
+/* STATUS - START  */
+
+@mixin status-theme($color, $background-color)
+    color: $color
+    background-color: $background-color
+    i.i-icon
+        background-color: $color
+
+div.div-status
+    @include box-shadow($space-none, $space-none, $space-thin, $space-tiny, #adb5bd)
+
+@each $type, $theme in $status-theme
+    div.div-status-#{$type}
+        @include status-theme(map-get($theme, color), map-get($theme, background-color))    
+
+/* STATUS - END  */

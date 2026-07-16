@@ -1,0 +1,31 @@
+<div class="div-signin-container">
+    <div class="div-signin-image-container">
+        <img id="img-signin-background" alt="">
+    </div>
+    <div class="div-signin-form-container">
+        <div class="div-container-form">
+            <section id="section-main">
+                <section class="section-card">
+                    <h3>Sign In</h3>
+
+                    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+
+                        <label class="label-input" for="input-username">Username</label>
+                        <input class="input-general" type="text" id="input-username" name="input-username" placeholder="Input Username"
+                            formControlName="username" [ngClass]="{ 'is-invalid': booleanSubmitted && fcLogin['username'].errors }">
+
+                        <label class="label-input" for="input-password">Password</label>
+                        <input class="input-general" type="password" id="input-password" name="input-password" placeholder="Input Password"
+                            formControlName="password" [ngClass]="{ 'is-invalid': booleanSubmitted && fcLogin['password'].errors }">
+                        
+                        <div class="div-signin-button-container">
+                            <button id="button-process" class="button-general button-process" type="submit">Login</button>
+                        </div>
+                    </form>
+
+                </section>
+            </section>
+        </div>    
+
+    </div>
+</div>

@@ -1,0 +1,243 @@
+/* SPACE - START  */
+
+$space-none: 0px;
+$space-tiny: 1px;
+$space-thin: 2px;
+$space-small: 2.5px;
+$space-petite: 5px;
+$space-moderate: 7.5px;
+$space-medium: 10px;
+$space-average: 12.5px;
+$space-considerable: 15px;
+$space-large: 20px;
+$space-massive: 25px;
+$space-enormous: 30px;
+$space-colossal: 50px;
+
+/* SPACE - END  */
+
+
+/* BORDER - START  */
+
+$border-thin: 1px;
+$border-slim: 2px;
+$border-moderate: 3px;
+$border-thick: 4px;
+$border-dense: 5px;
+
+/* BORDER - END  */
+
+
+/* BOOLEAN - START  */
+
+$boolean-true: true;
+$boolean-false: false;
+
+/* BOOLEAN - END  */
+
+
+/* PATH - START  */
+
+$path-font: "../../fonts/";
+$path-icon: "../../icons/";
+
+/* PATH - START  */
+
+
+/* THEME - START  */
+
+$button-theme:
+(
+    disabled:
+    (
+        text-color: #fff,
+        background-color: #a1a4ab,
+        active-background-color: #8e9199,
+        light-text-color: #8e9199,
+        light-background-color: #efefef,
+        light-active-background-color: #d9d9d9,
+        outline-text-color: #8e9199,
+        outline-background-color: #fff,
+        outline-active-background-color: #d9d9d9,
+    ),
+    success:
+    (
+        text-color: #fff,
+        background-color: #34a063,
+        active-background-color: #2f944f,
+        light-text-color: #2f944f,
+        light-background-color: #e0f7e7,
+        light-active-background-color: #90c8a1,
+        outline-text-color: #2f944f,
+        outline-background-color: #fff,
+        outline-active-background-color: #90c8a1,
+    ),
+    process:
+    (
+        text-color: #fff,
+        background-color: #495bbf,
+        active-background-color: #3b4cad,
+        light-text-color: #3b4cad,
+        light-background-color: #eaecfb,
+        light-active-background-color: #a5acdd,
+        outline-text-color: #3b4cad,
+        outline-background-color: #fff,
+        outline-active-background-color: #a5acdd,
+    ),
+    warning:
+    (
+        text-color: #495057,
+        background-color: #cfcf2a,
+        active-background-color: #bebe1e,
+        light-text-color: #aeae18,
+        light-background-color: #ffffe8,
+        light-active-background-color: #dcdca2,
+        outline-text-color: #aeae18,
+        outline-background-color: #fff,
+        outline-active-background-color: #dcdca2,
+    ),
+    danger:
+    (
+        text-color: #fff,
+        background-color: #e74141,
+        active-background-color: #e72929,
+        light-text-color: #e72929,
+        light-background-color: #fce6e6,
+        light-active-background-color: #e3c9c9,
+        outline-text-color: #e72929,
+        outline-background-color: #fff,
+        outline-active-background-color: #e3c9c9,
+    )
+);
+
+$status-theme:
+(
+    success:
+    (
+        color: #26874f,
+        background-color: #c6e9d4
+    ),
+    process:
+    (
+        color: #263487,
+        background-color: #cfd4f3
+    ),
+    warning:
+    (
+        color: #9c901f,
+        background-color: #f1eccf
+    ),
+    danger:
+    (
+        color: #b61f1f,
+        background-color: #f3cbcb
+    ),
+    light:
+    (
+        color: #89898e,
+        background-color: #ecedf1
+    ),
+);
+
+/* THEME - END  */
+
+
+/* FONT FAMILY - START  */
+
+$font-families:
+(
+    poppins:
+    (
+        poppins-black: "poppins_black",
+        poppins-blackitalic: "poppins_blackitalic",
+        poppins-bold: "poppins_bold",
+        poppins-bolditalic: "poppins_bolditalic",
+        poppins-semibold: "poppins_semibold",
+        poppins-semibolditalic: "poppins_semibolditalic",
+        poppins-italic: "poppins_italic",
+        poppins-light: "poppins_light",
+        poppins-lightitalic: "poppins_lightitalic",
+        poppins-medium: "poppins_medium",
+        poppins-mediumitalic: "poppins_mediumitalic",
+        poppins-regular: "poppins_regular",
+        poppins-thin: "poppins_thin",
+        poppins-thinitalic: "poppins_thinitalic",
+    ),
+    roboto:
+    (
+        roboto-black: "roboto_black",
+        roboto-blackItalic: "roboto_blackItalic",
+        roboto-bold: "roboto_bold",
+        roboto-boldItalic: "roboto_boldItalic",
+        roboto-italic: "roboto_italic",
+        roboto-light: "roboto_light",
+        roboto-lightItalic: "roboto_lightItalic",
+        roboto-medium: "roboto_medium",
+        roboto-mediumItalic: "roboto_mediumItalic",
+        roboto-regular: "roboto_regular",
+        roboto-thin: "roboto_thin",
+        roboto-thinItalic: "roboto_thinItalic",
+    )
+);
+
+
+/* FONT FAMILY - END  */
+
+
+/* ICON - START  */
+
+$icons:
+(
+    // ban: "ban",
+    // bars-staggered: "bars_staggered",
+    bars: "bars",
+    // bell: "bell",
+    // calendar-day: "calendar_day",
+    caret-down: "caret_down",
+    caret-left: "caret_left",
+    caret-right: "caret_right",
+    // caret-up: "caret_up",
+    // cart-shopping: "cart_shopping",
+    // check: "check",
+    // clock: "clock",
+    // diagram-successor: "diagram_successor",
+    // ellipsis-vertical: "ellipsis_vertical",
+    // ellipsis: "ellipsis",
+    // envelop: "envelop",
+    // file-circle-plus: "file_circle_plus",
+    // file-excel: "file_excel",
+    // file-export: "file_export",
+    // file-import: "file_import",
+    // file-invoice: "file_invoice",
+    // file-lines: "file_lines",
+    // file-pdf: "file_pdf",
+    // file-pen: "file_pen",
+    // file-word: "file_word",
+    // font: "font",
+    // gear: "gear",
+    house: "house",
+    // icons: "icons",
+    // magnifying-glass: "magnifying_glass",
+    // minus: "minus",
+    // paper-plane: "paper_plane",
+    // pen: "pen",
+    // phone: "phone",
+    // plus: "plus",
+    // rotate-left: "rotate_left",
+    // rotate-right: "rotate_right",
+    // rotate: "rotate",
+    // sort: "sort",
+    // table-list: "table_list",
+    // toggle-on: "toggle_on",
+    // trash-can: "trash_can",
+    // triangle-exclamation: "triangle_exclamation",
+    user: "user",
+    // xmark: "xmark"
+);
+
+@mixin icon-mask($svg-icon)
+{
+    mask-image: url($path-icon + $svg-icon + ".svg")
+}
+
+/* ICON - END  */

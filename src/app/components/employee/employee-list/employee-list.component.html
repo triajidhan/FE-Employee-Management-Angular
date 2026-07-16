@@ -1,0 +1,64 @@
+<h2>Employee</h2>
+
+<div class="div-container-card">
+    <section class="section-card">
+        
+        <div class="div-table-header">
+            <div class="div-table-left-header">
+                <h3>Employee List</h3>
+            </div>
+            <div class="div-table-right-header">
+                <button id="button-process" class="button-general button-success button-right-icon icon-plus"
+                    type="button">Add Data</button>
+            </div>
+        </div>
+
+        <div class="div-table-container">
+            <div class="div-table-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="th-index-number">No</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th>Gender</th>
+                            <th class="th-center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (dataTable of _arrayDataTable; track dataTable.id; let numberIndex = $index)
+                        {
+                        <tr>
+                            <td class="td-index-number">{{ numberIndex + 1 }}</td>
+                            <td>{{ dataTable.name }}</td>
+                            <td>{{ dataTable.email }}</td>
+                            <td>{{ dataTable.contact }}</td>
+                            <td>{{ dataTable.gender }}</td>
+                            <td class="td-status">
+                                <div class="div-status-container">
+                                    <div class="div-status" [ngClass]="{'div-status-success': dataTable.status === 'COMPLETED',
+                                            'div-status-process': dataTable.status === 'PROCESSING',
+                                            'div-status-warning': dataTable.status === 'PENDING',
+                                            'div-status-light': dataTable.status === 'ON HOLD',
+                                            'div-status-danger': dataTable.status === 'REJECTED'}">
+                                        <span>{{ dataTable.status }}</span>
+                                        <i class="i-icon i-table-status-icon" [ngClass]="{'icon-check': dataTable.status === 'COMPLETED',
+                                                'icon-rotate-right': dataTable.status === 'PROCESSING',
+                                                'icon-bars-staggered': dataTable.status === 'PENDING',
+                                                'icon-ban': dataTable.status === 'ON HOLD',
+                                                'icon-xmark': dataTable.status === 'REJECTED'}"></i>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <app-navtable></app-navtable>
+
+    </section>
+</div>

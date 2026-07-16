@@ -1,0 +1,99 @@
+<div [ngClass]="{'div-body-open-menu': _booleanToggleNavigation, 'div-body-close-menu': !_booleanToggleNavigation}">
+    <aside>
+        <header>
+            <figure>
+                @if (_booleanToggleNavigation)
+                {
+                <img src="/assets/logos/company_logo_wordmark.png" alt="Company Logo">
+                }
+                @else
+                {
+                <img src="/assets/logos/company_logo.png" alt="Company Logo">
+                }
+            </figure>
+        </header>
+        <nav>
+            <ul class="ul-nav">
+                @for (menu of _arrayMenu; track $index;)
+                {
+                <li class="li-nav">
+                    <div class="div-nav" (click)="clickMenuList(menu.title)">
+                        <div class="div-nav-content">
+                            <i class="i-icon i-nav-icon {{ menu.icon }}"></i>
+                            <a id="{{ menu.title }}">{{ menu.title }}</a>
+                        </div>
+                        @if (menu.arraySubMenu)
+                        {
+                        <i class="i-icon i-nav-icon i-icon-left icon-caret-down"
+                            [ngClass]="{'i-rotate-icon-180': menu.open}">
+                        </i>
+                        }
+                    </div>
+                    @if (!_booleanToggleNavigation)
+                    {
+                    <div class="div-nav-content-hover-container">
+                        <div class="div-nav-content-hover">
+                            <div class="div-box-arrow"></div>
+                            <a id="{{ menu.title }}" (click)="clickMenuList(menu.title)"
+                                [ngClass]="{'a-nav-hover': !menu.arraySubMenu?.length}">
+                                {{ menu.title }}
+                            </a>
+                            @if (menu.arraySubMenu?.length)
+                            {
+                            <ul class="ul-nav-item-hover">
+                                @for (subMenu of menu.arraySubMenu; track $index)
+                                {
+                                <li class="li-nav-item">
+                                    <div class="div-nav-item" (click)="clickSubMenuList(menu.title, subMenu.title)">
+                                        <a id="{{ menu.title }}-{{ subMenu.title }}">{{ subMenu.title }}</a>
+                                    </div>
+                                </li>
+                                }
+                            </ul>
+                            }
+                        </div>
+                    </div>
+                    }
+                    <ul class="ul-nav-item"
+                        [ngStyle]="{height: menu.open ? getHeightMenu(menu.arraySubMenu?.length) : 0}">
+                        @for (subMenu of menu.arraySubMenu; track $index)
+                        {
+                        <li class="li-nav-item">
+                            <div class="div-nav-item" (click)="clickSubMenuList(menu.title, subMenu.title)">
+                                <a id="{{ menu.title }}-{{ subMenu.title }}">{{ subMenu.title }}</a>
+                            </div>
+                        </li>
+                        }
+                    </ul>
+                </li>
+                }
+            </ul>
+        </nav>
+    </aside>
+    <main>
+        <section id="section-header">
+            <div class="div-toggle-navigation" (click)="toggleMenu()">
+                <i class="i-icon i-toggle-navigation-icon icon-bars"></i>
+            </div>
+            <div>
+                <div class="div-nav-profile-container">
+                    <div class="div-nav-profile-content">
+                        <img src="../../../assets/images/profile.png" alt="Profile Image">
+                        <i class="i-icon i-icon-profile icon-caret-down"></i>
+                    </div>
+                    <div class="div-nav-profile-dropdown">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="section-main">
+            <div>
+                <router-outlet></router-outlet>
+            </div>
+            <footer>
+                <p>© Tri Aji Ramadhan. All right reserved</p>
+            </footer>
+        </section>
+    </main>
+</div>

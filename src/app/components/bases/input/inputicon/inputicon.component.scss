@@ -1,0 +1,23 @@
+div.div-input-icon-container
+{
+    position: relative;
+    i.i-icon-input
+    {
+        position: absolute;
+        right: 12.5px;
+        top: 8px;
+    }
+    input.input-general
+    {
+        padding-right: 45px;
+    }
+    i.i-icon-input-left
+    {
+        left: 12.5px;
+    }
+    i.i-icon-input-left + input.input-general
+    {
+        padding-left: 45px;
+        padding-right: 15px;
+    }
+}

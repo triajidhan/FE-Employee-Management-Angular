@@ -1,0 +1,389 @@
+/* IMPORT - START */
+
+@import ../scss/initialization-general
+@import vendor-prefix-general
+@import theme-general
+
+/* IMPORT - END */
+
+
+/* HOME - START */
+
+/* GENERAL - START */
+
+*
+    padding: $space-none
+    margin: $space-none
+    box-sizing: border-box
+
+/* GENERAL - END */
+
+
+/* BODY - START */
+
+body
+    @include scrollbar-size($space-petite, auto)
+    @include scrollbar-thumb-border-radius($space-petite)
+    @include scrollbar-visibility(hidden)
+    @include scrollbar-thumb-visibility(hidden)
+    div.div-body-open-menu
+        display: grid
+        grid-template-columns: 250px calc(100vw - 250px)
+        transition: grid 0.25s
+        aside
+            nav
+                ul.ul-nav
+                    li.li-nav
+                        div.div-nav
+                            div.div-nav-content-hover
+                                display: none
+    div.div-body-close-menu
+        display: grid
+        grid-template-columns: 70px calc(100vw - 70px)
+        transition: grid 0.25s
+        aside
+            header
+                padding: 20px 20px
+            nav
+                ul.ul-nav
+                    li.li-nav
+                        &:hover > div.div-nav-content-hover-container
+                            display: block
+                        div.div-nav-content
+                            a
+                                display: none
+                        div.div-nav-content-hover-container
+                            display: none
+                            position: absolute
+                            width: 230px
+                            transform: translateY(-45px)
+                            left: 60px
+                            div.div-nav-content-hover > a
+                                padding: 5px 10px
+                                border-radius: 5px
+                                width: 100%
+                                display: block
+                            div.div-nav-content-hover > a.a-nav-hover
+                                cursor: pointer
+                                &:hover
+                                    background-color: #f6e9ff
+                            div.div-nav-content-hover
+                                background-color: #fff
+                                margin-left: 30px
+                                display: none
+                                display: block
+                                padding: 10px 15px
+                                border-radius: 5px
+                                @include box-shadow(0px, 0px, 5px, 1px, $color-gray-400)
+                                ul.ul-nav-item-hover
+                                    margin-top: 10px
+                                    padding: 10px 0px 5px 0px
+                                    display: block
+                                    border-top: 1px solid #a5a5bb
+                                    li.li-nav-item
+                                        cursor: pointer
+                                        padding: 5px 15px
+                                        border-radius: 5px
+                                        &:hover
+                                            background-color: #f6e9ff
+                                div.div-box-arrow
+                                    width: 20px
+                                    height: 20px
+                                    transform: rotate(45deg) translateY(3px) translateX(3px)
+                                    background-color: #ffffff
+                                    position: absolute
+                                    left: 20px
+                                i.icon-caret-down
+                                    display: none
+                                &:hover
+                                        display: block
+                        ul.ul-nav-item
+                            display: none
+        main
+            section#section-main
+                div.div-table-container
+                    div.div-table-content
+                        width: calc(100vw - 200px)
+
+    aside
+        height: 100vh
+        display: grid
+        grid-template-rows: 75px auto
+        &:hover
+            @include scrollbar-thumb-visibility(visible)
+
+/* BODY - END */
+
+
+/* HEADER - START */
+
+header
+    padding: 20px 30px
+    transition: padding 0.25s
+    figure
+        width: max-content
+        cursor: pointer
+        @include border-radius(5px)
+        img
+            height: 30px
+
+/* BODY - END */
+
+
+/* NAV - START */
+
+nav
+    width: 100%
+    height: max-content
+    max-height: calc(100vh - 75px)
+    overflow-y: auto
+    ul.ul-nav
+        padding: 0 10px
+        li.li-nav
+            font-size: 14px
+            div.div-nav-content
+                display: flex
+                align-items: center
+            div.div-nav
+                display: flex
+                justify-content: space-between
+                align-items: center
+                cursor: pointer
+                padding: 7.5px 15px
+                min-height: 38.5px
+                @include border-radius(5px)
+                &:hover
+                    background-color: #f6e9ff
+                a
+                    padding: 0 15px
+            ul.ul-nav-item
+                transition: height 0.25s
+                overflow: hidden
+                li.li-nav-item
+                    div.div-nav-item
+                        cursor: pointer
+                        padding: 7.5px 15px
+                        padding-left: 47.5px
+                        @include border-radius(5px)
+                        &:hover
+                            background-color: #f6e9ff
+            div.div.div-nav-content-hover-container
+                display: none
+
+/* NAV - END */
+
+
+/* MAIN - START */
+
+main
+    @include scrollbar-size($space-considerable, auto)
+    @include scrollbar-thumb-border-radius($space-petite)
+    @include scrollbar-visibility(visible)
+    @include scrollbar-thumb-visibility(visible)
+    section#section-header
+        display: flex
+        justify-content: space-between
+        align-items: center
+        padding:  0px 20px
+        height: 70px
+        border-bottom: 1px solid #cbcbcb
+        div.div-toggle-navigation
+            cursor: pointer
+        div.div-nav-profile-container
+            position: relative
+            cursor: pointer
+            div.div-nav-profile-content
+                display: flex
+                gap: 10px
+                align-items: center
+                padding-right: 20px
+                img
+                    width: 40px
+                    height: 40px
+                    border-radius: 50%
+    section#section-main
+        @include scrollbar-size($space-petite, auto)
+        @include scrollbar-thumb-border-radius($space-petite)
+        @include scrollbar-visibility(hidden)
+        @include scrollbar-thumb-visibility(hidden)
+        width: 100%
+        height: calc(100vh - 70px)
+        padding: 20px 25px
+        overflow-y: auto
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        
+
+/* MAIN - END */
+
+
+/* FOOTER - START */
+
+footer
+    border-top: 1px solid #cbcbcb
+    padding: 20px 0 7.5px 0
+    margin-top: 30px
+
+/* FOOTER - END */
+
+/* HOME - END */
+
+
+/* CARD - START */
+
+section#section-main
+    div.div-container-card
+        display: grid
+        gap: 25px
+    section.section-card
+        background-color: #fff
+        padding: 25px 30px
+        border-radius: 10px
+        box-shadow: 0 0 5px 1px #ced4da
+
+/* CARD - END */
+
+
+/* CONTAINER - START */
+
+section#section-main
+    div.div-data-group
+        margin-bottom: 15px
+        text-align: justify
+    div.div-data-group-top-space
+        text-align: justify
+        margin-top: 15px
+        margin-bottom: 15px
+    div.div-container-margin-top
+        margin-top: 22.5px
+    div.div-container-horizontal
+        display: flex
+        flex-wrap: wrap
+        gap: 22.5px
+    div.div-container-one-column
+        display: grid
+        grid-template-columns: 1fr
+        gap: 22.5px
+    div.div-container-two-column
+        display: grid
+        grid-template-columns: repeat(2, 1fr)
+        align-content: stretch
+        gap: 22.5px
+        section.section-card
+            height: 100%
+    div.div-container-three-column
+        display: grid
+        grid-template-columns: repeat(3, 1fr)
+        align-content: stretch
+        gap: 22.5px
+        section.section-card
+            height: 100%
+    div.div-container-icon
+        section.section-card
+            display: flex
+            cursor: pointer
+            flex-direction: column
+            align-items: center
+            gap: 12.5px
+            label
+                font-size: 12px
+    div.div-container-button
+        ul
+            display: grid
+            padding: 10px 0
+            gap: 15px
+            li
+                display: flex
+                align-items: center
+                justify-content: space-between
+                label
+                    font-size: 14px
+                div.div-button-container
+                    display: flex
+                    gap: 15px
+
+/* CONTAINER - END */
+
+
+/* TABLE - START */
+
+section#section-main
+    div.div-table-header
+        display: flex
+        align-items: center 
+        justify-content: space-between
+        margin-bottom: 15px
+        div.div-table-left-header,
+        div.div-table-right-header
+            display: flex
+            align-items: center
+            gap: 10px
+    div.div-table-footer
+        display: flex
+        align-items: center 
+        justify-content: space-between
+        margin-top: 15px
+        div.div-table-left-footer,
+        div.div-table-right-footer
+            display: flex
+            align-items: center
+            gap: 10px
+            p.p-table-information
+                font-size: 14px
+    div.div-table-container
+        @include scrollbar-size(auto, $space-moderate)
+        &:hover
+            @include scrollbar-thumb-visibility(visible)
+        div.div-table-content
+            padding-bottom: 5px
+            overflow-x: scroll
+            width: calc(100vw - 380px)
+            transition: width 0.25s
+            table
+                border-collapse: collapse
+                min-width: 100%
+                width: max-content
+                thead
+                    tr
+                        th
+                            font-size: 14px
+                            border-top: 2px solid #ced4da
+                            border-bottom: 2px solid #ced4da
+                            padding: 7.5px 20px
+                            text-align: left
+                        th.th-center
+                            text-align: center
+                        th.th-right
+                            text-align: right
+                        th.th-index-number
+                            width: 50px
+                            text-align: center
+                tbody
+                    tr
+                        td
+                            font-size: 14px
+                            border-top: 1px solid #ced4da
+                            border-bottom: 1px solid #ced4da
+                            padding: 10px 20px
+                            max-width: 300px
+                        td.td-center
+                            text-align: center
+                        td.td-right
+                            text-align: right
+                        td.td-index-number
+                            width: 50px
+                            text-align: center
+                        td.td-status
+                            div.div-status-container
+                                display: flex
+                                justify-content: center
+                                div.div-status
+                                    display: flex
+                                    align-items: center
+                                    gap: 5px
+                                    font-size: 11px
+                                    padding: 1px 10px
+                                    font-weight: 700
+                   
+/* TABLE - END */
