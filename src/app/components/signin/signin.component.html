@@ -8,15 +8,15 @@
                 <section class="section-card">
                     <h3>Sign In</h3>
 
-                    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+                    <form [formGroup]="_formLogin" (ngSubmit)="onSubmit()">
 
                         <label class="label-input" for="input-username">Username</label>
                         <input class="input-general" type="text" id="input-username" name="input-username" placeholder="Input Username"
-                            formControlName="username" [ngClass]="{ 'is-invalid': booleanSubmitted && fcLogin['username'].errors }">
+                            formControlName="username" [ngClass]="{ 'is-invalid': _booleanSubmitted && fcLogin['username'].errors }">
 
                         <label class="label-input" for="input-password">Password</label>
                         <input class="input-general" type="password" id="input-password" name="input-password" placeholder="Input Password"
-                            formControlName="password" [ngClass]="{ 'is-invalid': booleanSubmitted && fcLogin['password'].errors }">
+                            formControlName="password" [ngClass]="{ 'is-invalid': _booleanSubmitted && fcLogin['password'].errors }">
                         
                         <div class="div-signin-button-container">
                             <button id="button-process" class="button-general button-process" type="submit">Login</button>

@@ -325,14 +325,25 @@ section#section-main
 section#section-main
     div.div-table-header
         display: flex
-        align-items: center 
+        align-items: flex-end
         justify-content: space-between
         margin-bottom: 15px
-        div.div-table-left-header,
+        div.div-table-left-header > form,
         div.div-table-right-header
             display: flex
-            align-items: center
+            align-items: flex-end
             gap: 10px
+            div.div-search-input-container
+                display: grid
+                grid-template-columns: 1fr
+                label
+                    font-size: 14px
+            div.div-search-button-container
+                display: flex
+                gap: 10px
+                padding-bottom: 5px
+        div.div-table-right-header
+            padding-bottom: 5px
     div.div-table-footer
         display: flex
         align-items: center 
@@ -399,5 +410,10 @@ section#section-main
                                     font-size: 11px
                                     padding: 1px 10px
                                     font-weight: 700
+                        td.td-action
+                            div.div-td-button-container
+                                display: flex
+                                justify-content: center
+                                gap: 10px
                    
 /* TABLE - END */

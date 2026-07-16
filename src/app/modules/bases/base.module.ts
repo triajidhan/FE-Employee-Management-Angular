@@ -3,7 +3,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { InputModule } from "../input.module";
 import { NavModule } from "../nav.module";
 
@@ -20,6 +20,7 @@ import { NavModule } from "../nav.module";
         CommonModule,
         FormsModule,
         RouterModule,
+        ReactiveFormsModule,
         InputModule,
         NavModule,
     ],
@@ -28,6 +29,7 @@ import { NavModule } from "../nav.module";
         CommonModule,
         FormsModule,
         RouterModule,
+        ReactiveFormsModule,
         InputModule,
         NavModule,
     ],

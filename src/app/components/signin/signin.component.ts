@@ -32,9 +32,9 @@ export class SigninComponent implements OnInit
 
     //#region DECLARATION
 
-    public formLogin!: FormGroup;
-    public signinAdmin!: Signin;
-    public booleanSubmitted: boolean;
+    public _formLogin!: FormGroup;
+    public _signinAdmin!: Signin;
+    public _booleanSubmitted: boolean;
 
     //#endregion
 
@@ -43,7 +43,7 @@ export class SigninComponent implements OnInit
 
     constructor(private formBuilder: FormBuilder, private router: Router)
     {
-        this.booleanSubmitted = false;
+        this._booleanSubmitted = false;
     }
     
     //#endregion
@@ -64,7 +64,7 @@ export class SigninComponent implements OnInit
 
     private setFormLogin(): void
     {
-        this.formLogin = this.formBuilder.group
+        this._formLogin = this.formBuilder.group
         ({
             username: ["", [Validators.required, Validators.minLength(4)]],
             password: ["", [Validators.required, Validators.minLength(6)]]
@@ -73,7 +73,7 @@ export class SigninComponent implements OnInit
 
     private setSigninAdmin(): void
     {
-        this.signinAdmin =
+        this._signinAdmin =
         {
             username: "superadmin",
             password: "super_admin"
@@ -85,7 +85,7 @@ export class SigninComponent implements OnInit
 
     //#region GETTER
 
-    public get fcLogin() { return this.formLogin.controls; }
+    public get fcLogin() { return this._formLogin.controls; }
 
     //#endregion
 
@@ -94,23 +94,23 @@ export class SigninComponent implements OnInit
 
     public onSubmit(): void
     {
-        this.booleanSubmitted = true;
+        this._booleanSubmitted = true;
 
-        if (this.formLogin.invalid)
+        if (this._formLogin.invalid)
         {
             alert('Username atau Password tidak sesuai!');
         }
-        else if (this.formLogin.value.username !== this.signinAdmin.username)
+        else if (this._formLogin.value.username !== this._signinAdmin.username)
         {
-            alert(`Maaf, Username "${this.formLogin.value.username}" tidak terdaftar di sistem!`);
+            alert(`Maaf, Username "${this._formLogin.value.username}" tidak terdaftar di sistem!`);
         }
-        else if (this.formLogin.value.password !== this.signinAdmin.password)
+        else if (this._formLogin.value.password !== this._signinAdmin.password)
         {
             alert("Password yang Anda masukkan tidak sesuai!");
         }
         else
         {
-            alert(`Selamat Datang, ${this.formLogin.value.username}!`);
+            alert(`Selamat Datang, ${this._formLogin.value.username}!`);
             this.router.navigate(["/home/dashboard"]);
         }
 

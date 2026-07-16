@@ -17,15 +17,22 @@ export const ARRAY_EMPLOYEES: EmployeeModel[] = [];
 
 export function initializeDummyData(): void
 {
-    if (ARRAY_EMPLOYEES.length === 0) {
+    
+    if (ARRAY_EMPLOYEES.length === 0)
+    {
+        const ARRAY_FIRSTNAMES = ['Budi', 'Siti', 'Ahmad', 'Dewi', 'Rizky', 'Putri', 'Eko', 'Mega', 'Aditya', 'Fitri'];
+        const ARRAY_LASTNAMES = ['Santoso', 'Rahmawati', 'Hidayat', 'Lestari', 'Pratama', 'Utami', 'Prasetyo', 'Wijaya', 'Nugroho', 'Handayani'];
+
         for (let i = 1; i <= 116; i++) {
             const employee = new EmployeeModel();
             const randomIndex = Math.floor(Math.random() * ARRAY_GROUPS.length);
+            const randomIdxFirstName = Math.floor(Math.random() * ARRAY_FIRSTNAMES.length);
+            const randomIdxLastName = Math.floor(Math.random() * ARRAY_LASTNAMES.length);
 
-            employee.username = `username_employee${i}`;
-            employee.firstName = "Karyawan";
-            employee.lastName = `Ke-${i}`;
-            employee.email = `karyawan${i}@emp.com`;
+            employee.username = `user.${ARRAY_FIRSTNAMES[randomIdxFirstName].toLowerCase()}${i}`;
+            employee.firstName = ARRAY_FIRSTNAMES[randomIdxFirstName];
+            employee.lastName = `${ARRAY_LASTNAMES[randomIdxLastName]}${i}`;
+            employee.email = `${ARRAY_FIRSTNAMES[randomIdxFirstName].toLowerCase() }${i}@emp.com`;
             employee.birthDate = generateRandomBirthDate();
             employee.basicSalary = 5700000;
             employee.status = "Active";

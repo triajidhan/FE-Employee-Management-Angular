@@ -198,7 +198,7 @@ $icons:
     caret-right: "caret_right",
     // caret-up: "caret_up",
     // cart-shopping: "cart_shopping",
-    // check: "check",
+    check: "check",
     // clock: "clock",
     // diagram-successor: "diagram_successor",
     // ellipsis-vertical: "ellipsis_vertical",
@@ -220,7 +220,7 @@ $icons:
     magnifying-glass: "magnifying_glass",
     // minus: "minus",
     // paper-plane: "paper_plane",
-    // pen: "pen",
+    pen: "pen",
     // phone: "phone",
     plus: "plus",
     // rotate-left: "rotate_left",
@@ -229,10 +229,10 @@ $icons:
     // sort: "sort",
     // table-list: "table_list",
     // toggle-on: "toggle_on",
-    // trash-can: "trash_can",
+    trash-can: "trash_can",
     // triangle-exclamation: "triangle_exclamation",
     user: "user",
-    // xmark: "xmark"
+    xmark: "xmark"
 );
 
 @mixin icon-mask($svg-icon)

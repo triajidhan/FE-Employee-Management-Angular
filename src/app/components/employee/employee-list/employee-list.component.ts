@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { EmployeeModel } from '../../../models/employee.model';
 import { EmployeeService } from '../../../services/employee.service';
 import { TableModel } from '../../../models/table.model';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-list',
@@ -16,7 +17,9 @@ export class EmployeeListComponent implements OnInit
 {
     //#region DECLARATION
     
+    public _formSearchEmployee!: FormGroup;
     public _employeeTable: TableModel;
+    public _booleanSubmitSearch: boolean;
     public _arrayModelEmployee: Array<EmployeeModel>;
     
     //#endregion
@@ -24,9 +27,10 @@ export class EmployeeListComponent implements OnInit
 
     //#region CONSTRUCTOR
 
-    constructor(private router: Router, private employeeService: EmployeeService)
+    constructor(private formBuilder: FormBuilder, private router: Router, private employeeService: EmployeeService)
     {
         this._employeeTable = new TableModel;
+        this._booleanSubmitSearch = false;
         this._arrayModelEmployee = [];
     }
 
@@ -37,15 +41,43 @@ export class EmployeeListComponent implements OnInit
 
     ngOnInit(): void
     {
+        this.setFormSearchEmployee();
         this.callGetAllEmployee();
     }
 
     //#endregion
 
 
+    //#region SETTER
+
+    private setFormSearchEmployee(): void
+    {
+        this._formSearchEmployee = this.formBuilder.group
+        (
+            {
+                name: ["", [Validators.pattern(/^(.{3,})?$/)]],
+                email: ["", [Validators.pattern(/^(.{3,})?$/)]]
+            },
+            {
+                validators: this.atLeastOneFilled
+            }
+        );
+    }
+
+    //#endregion
+
+
+    //#region GETTER
+
+    public get fcSearchEmployee() { return this._formSearchEmployee.controls; }
+
+
+    //#endregion
+
+
     //#region FUNCTION
 
-    public onPageChange(newPage: number)
+    public onPageChange(newPage: number): void
     {
         if (this._employeeTable)
         {
@@ -54,12 +86,61 @@ export class EmployeeListComponent implements OnInit
         }
     }
 
+    public onSearch(): void
+    {
+        this._booleanSubmitSearch = true;
+
+        if (this._formSearchEmployee.invalid)
+        {
+            if (this._formSearchEmployee.errors?.['requireOne'])
+            {
+                alert("Gagal mencari! Harap isi salah satu kolom (Nama atau Email) terlebih dahulu.");
+                return;
+            }
+            else if (this.fcSearchEmployee['name'].errors?.['pattern']) {
+                alert("Kolom NAMA kurang dari 3 karakter! Silakan tambah huruf pencarian Anda.");
+                return;
+            }
+            else if (this.fcSearchEmployee['email'].errors?.['pattern']) {
+                alert("Kolom EMAIL kurang dari 3 karakter! Silakan tambah huruf pencarian Anda.");
+                return;
+            }
+            return;
+        }
+
+        const strName = this._formSearchEmployee.value.name?.toLowerCase().trim();
+        const strEmail = this._formSearchEmployee.value.email?.toLowerCase().trim();
+
+        this.callGetAllEmployee(strName, strEmail);
+    }
+
+    private atLeastOneFilled(control: AbstractControl): ValidationErrors | null
+    {
+        const name = control.get('name')?.value;
+        const email = control.get('email')?.value;
+
+        if (!name?.trim() && !email?.trim())
+        {
+            return { requireOne: true };
+        }
+
+        return null;
+    }
+
+    public clearSearch(): void
+    {
+        this._formSearchEmployee.reset();
+        this._booleanSubmitSearch = false;
+        
+        this.callGetAllEmployee(); 
+    }
+
     //#endregion
 
 
     //#region SERVICE
 
-    public callGetAllEmployee(): void
+    public callGetAllEmployee(strName?: string, strEmployee?: string): void
     {
         const arrayEmployee = this.employeeService.getAllEmployees();
 
@@ -68,12 +149,34 @@ export class EmployeeListComponent implements OnInit
 
         const startIndex = (page - 1) * limit;
         const endIndex = startIndex + limit;
-
-        this._arrayModelEmployee = arrayEmployee.slice(startIndex, endIndex);
+        
         this._employeeTable.startData = startIndex + 1;
-        this._employeeTable.totalPage = Math.ceil(arrayEmployee.length / limit);
-        this._employeeTable.totalData = arrayEmployee.length;
-        this._employeeTable.endData = (endIndex > (this._employeeTable.totalData || 0)) ? this._employeeTable.totalData : endIndex;
+        
+        if (!strName && !strEmployee)
+        {
+            this._arrayModelEmployee = arrayEmployee.slice(startIndex, endIndex);
+            this._employeeTable.totalPage = Math.ceil(arrayEmployee.length / limit);
+            this._employeeTable.totalData = arrayEmployee.length;
+            this._employeeTable.endData = (endIndex > (this._employeeTable.totalData || 0)) ? this._employeeTable.totalData : endIndex;
+        }
+        else
+        {
+            const filteredArrayEmployeee = arrayEmployee.filter((employee) => {
+                
+                const fullName = `${employee.firstName} ${employee.lastName}`.toLowerCase();
+                const employeeEmail = employee.email?.toLowerCase() || '';
+
+                const matchName = strName ? fullName.includes(strName) : true;
+                const matchEmail = strEmployee ? employeeEmail.includes(strEmployee) : true;
+
+                return matchName && matchEmail;
+            });
+
+            this._arrayModelEmployee = filteredArrayEmployeee.slice(startIndex, endIndex);
+            this._employeeTable.totalPage = Math.ceil(filteredArrayEmployeee.length / limit);
+            this._employeeTable.totalData = filteredArrayEmployeee.length;
+            this._employeeTable.endData = (endIndex > (this._employeeTable.totalData || 0)) ? this._employeeTable.totalData : endIndex;
+        }
     }
 
     //#endregion
