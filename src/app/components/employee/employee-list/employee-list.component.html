@@ -1,15 +1,19 @@
-<h2>Employee</h2>
+<h2>Employee List</h2>
 
 <div class="div-container-card">
     <section class="section-card">
         
         <div class="div-table-header">
             <div class="div-table-left-header">
-                <h3>Employee List</h3>
+                <app-inputicon [placeholder]="'Search'" [position]="'left'"></app-inputicon>
+                <app-inputicon [placeholder]="'Search'" [position]="'left'"></app-inputicon>
+
+                <button id="button-process" class="button-general button-process button-light icon-rotate"
+                    type="button"></button>
             </div>
             <div class="div-table-right-header">
-                <button id="button-process" class="button-general button-success button-right-icon icon-plus"
-                    type="button">Add Data</button>
+                <button id="button-process" class="button-general button-success button-right-icon icon-plus" type="button">Add
+                    Data</button>
             </div>
         </div>
 
@@ -19,38 +23,27 @@
                     <thead>
                         <tr>
                             <th class="th-index-number">No</th>
+                            <th>Username</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Contact</th>
-                            <th>Gender</th>
+                            <th>Birth Date</th>
+                            <th>Basic Salary</th>
+                            <th>Group</th>
                             <th class="th-center">Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @for (dataTable of _arrayDataTable; track dataTable.id; let numberIndex = $index)
+                        @for (dataTable of _arrayModelEmployee; track dataTable.username; let numberIndex = $index)
                         {
                         <tr>
-                            <td class="td-index-number">{{ numberIndex + 1 }}</td>
-                            <td>{{ dataTable.name }}</td>
+                            <td class="td-index-number">{{ (_employeeTable?.startData ?? 0) + numberIndex }}</td>
+                            <td>{{ dataTable.username }}</td>
+                            <td>{{ dataTable.firstName }} {{ dataTable.lastName }}</td>
                             <td>{{ dataTable.email }}</td>
-                            <td>{{ dataTable.contact }}</td>
-                            <td>{{ dataTable.gender }}</td>
-                            <td class="td-status">
-                                <div class="div-status-container">
-                                    <div class="div-status" [ngClass]="{'div-status-success': dataTable.status === 'COMPLETED',
-                                            'div-status-process': dataTable.status === 'PROCESSING',
-                                            'div-status-warning': dataTable.status === 'PENDING',
-                                            'div-status-light': dataTable.status === 'ON HOLD',
-                                            'div-status-danger': dataTable.status === 'REJECTED'}">
-                                        <span>{{ dataTable.status }}</span>
-                                        <i class="i-icon i-table-status-icon" [ngClass]="{'icon-check': dataTable.status === 'COMPLETED',
-                                                'icon-rotate-right': dataTable.status === 'PROCESSING',
-                                                'icon-bars-staggered': dataTable.status === 'PENDING',
-                                                'icon-ban': dataTable.status === 'ON HOLD',
-                                                'icon-xmark': dataTable.status === 'REJECTED'}"></i>
-                                    </div>
-                                </div>
-                            </td>
+                            <td>{{ dataTable.birthDate | date: "dd MMMM yyyy" }}</td>
+                            <td>{{ dataTable.basicSalary | currency: 'IDR' : 'symbol' : '1.0-0' }}</td>
+                            <td>{{ dataTable.group }}</td>
+                            <td>{{ dataTable.status }}</td>
                         </tr>
                         }
                     </tbody>
@@ -58,7 +51,9 @@
             </div>
         </div>
 
-        <app-navtable></app-navtable>
-
+        <app-navtable
+            [_modelTable]="_employeeTable"
+            (pageChange)="onPageChange($event)">
+        </app-navtable>
     </section>
 </div>

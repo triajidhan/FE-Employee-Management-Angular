@@ -26,7 +26,8 @@ import { Router } from "@angular/router";
 
 //#region CLASS
 
-export class HomeComponent {
+export class HomeComponent
+{
     //#region DECLARATION
 
     public _booleanToggleNavigation: boolean;

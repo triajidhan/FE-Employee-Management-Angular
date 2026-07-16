@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseModule } from '../../../modules/bases/base.module';
+import { Router } from '@angular/router';
+import { EmployeeModel } from '../../../models/employee.model';
+import { EmployeeService } from '../../../services/employee.service';
+import { TableModel } from '../../../models/table.model';
 
 @Component({
   selector: 'app-employee-list',
@@ -8,134 +12,69 @@ import { BaseModule } from '../../../modules/bases/base.module';
   templateUrl: './employee-list.component.html',
   styleUrl: './employee-list.component.scss'
 })
-export class EmployeeListComponent
+export class EmployeeListComponent implements OnInit
 {
     //#region DECLARATION
+    
+    public _employeeTable: TableModel;
+    public _arrayModelEmployee: Array<EmployeeModel>;
+    
+    //#endregion
 
-    public _arrayDataTable =
-        [
-            {
-                id: "1",
-                name: "Ricky Antony",
-                email: "ricky@example.com",
-                address: "Ricky Antony, 2392 Main Avenue, Penasauka, New Jersey 02149",
-                contact: "0850762512**",
-                gender: "Male",
-                status: "COMPLETED",
-                deliveryType: "Cash on Delivery",
-                amount: "99",
-                date: "10/03/2023",
-            },
-            {
-                id: "2",
-                name: "Milind Mikuja",
-                email: "milind@example.com",
-                address: "Milind Mikuja, 1 Hollywood Blvd,Beverly Hills, California 90210",
-                contact: "0850762512**",
-                gender: "Female",
-                status: "PROCESSING",
-                deliveryType: "Cash on Delivery",
-                amount: "120",
-                date: "10/03/2023",
-            },
-            {
-                id: "3",
-                name: "Stanly Drinkwater",
-                email: "stanly@example.com",
-                address: "Stanly Drinkwater, 1 Infinite Loop, Cupertino, California 90210",
-                contact: "0850762512**",
-                gender: "Female",
-                status: "ON HOLD",
-                deliveryType: "Local Delivery",
-                amount: "70",
-                date: "30/04/2023",
-            },
-            {
-                id: "4",
-                name: "Brandon Bednar",
-                email: "brandon@example.com",
-                address: "Brandon Bednar, 25156 Isaac Crossing Apt. 810 Lonborough, CO 83774-5999",
-                contact: "0850762512**",
-                gender: "Male",
-                status: "REJECTED",
-                deliveryType: "Flat Rate",
-                amount: "39",
-                date: "22/04/2023",
-            },
-            {
-                id: "5",
-                name: "Trace Farrell",
-                email: "trace@example.com",
-                address: "Trace Farrell, 431 Steuber Mews Apt. 252 Germanland, AK 25882",
-                contact: "0850762512**",
-                gender: "Male",
-                status: "COMPLETED",
-                deliveryType: "Cash on Delivery",
-                amount: "99",
-                date: "26/04/2023	",
-            },
-            {
-                id: "6",
-                name: "Thomas Stephenson",
-                email: "thomas@example.com",
-                address: "Thomas Stephenson, 116 Ballifeary Road, Bamff",
-                contact: "0850762512**",
-                gender: "Male",
-                status: "PENDING",
-                deliveryType: "Flat Rate",
-                amount: "99",
-                date: "29/04/2023",
-            },
-            {
-                id: "7",
-                name: "Simeon Harber",
-                email: "simeon@example.com",
-                address: "Simeon Harber, 702 Kunde Plain Apt. 634 East Bridgetview, HI 13134-1862",
-                contact: "0850762512**",
-                gender: "Male",
-                status: "COMPLETED",
-                deliveryType: "Free Shipping",
-                amount: "38",
-                date: "27/04/2023",
-            },
-            {
-                id: "8",
-                name: "Roy Anderson",
-                email: "roy@example.com",
-                address: "Roy Anderson, 1 Infinite Loop, Cupertino, California 90210",
-                contact: "0850762512**",
-                gender: "Male",
-                status: "COMPLETED",
-                deliveryType: "Cash on Delivery",
-                amount: "99",
-                date: "29/04/2023",
-            },
-            {
-                id: "9",
-                name: "Miles Haley",
-                email: "miles@example.com",
-                address: "Miles Haley, 1 Hollywood Blvd,Beverly Hills, California 90210",
-                contact: "0850762512**",
-                gender: "Female",
-                status: "PROCESSING",
-                deliveryType: "Cash on Delivery",
-                amount: "120",
-                date: "10/03/2023",
-            },
-            {
-                id: "10",
-                name: "Lucienne Blick",
-                email: "lucienne@example.com",
-                address: "Lucienne, 1 Infinite Loop, Cupertino, California 23252",
-                contact: "0850762512**",
-                gender: "Female",
-                status: "ON HOLD",
-                deliveryType: "Local Delivery",
-                amount: "70",
-                date: "30/04/2023",
-            },
-        ];
 
+    //#region CONSTRUCTOR
+
+    constructor(private router: Router, private employeeService: EmployeeService)
+    {
+        this._employeeTable = new TableModel;
+        this._arrayModelEmployee = [];
+    }
+
+    //#endregion
+
+
+    //#region INITIALIZATION
+
+    ngOnInit(): void
+    {
+        this.callGetAllEmployee();
+    }
+
+    //#endregion
+
+
+    //#region FUNCTION
+
+    public onPageChange(newPage: number)
+    {
+        if (this._employeeTable)
+        {
+            this._employeeTable.currentPage = newPage;
+            this.callGetAllEmployee();
+        }
+    }
+
+    //#endregion
+
+
+    //#region SERVICE
+
+    public callGetAllEmployee(): void
+    {
+        const arrayEmployee = this.employeeService.getAllEmployees();
+
+        const limit = this._employeeTable.pagination || 20;
+        const page = this._employeeTable.currentPage || 1;
+
+        const startIndex = (page - 1) * limit;
+        const endIndex = startIndex + limit;
+
+        this._arrayModelEmployee = arrayEmployee.slice(startIndex, endIndex);
+        this._employeeTable.startData = startIndex + 1;
+        this._employeeTable.totalPage = Math.ceil(arrayEmployee.length / limit);
+        this._employeeTable.totalData = arrayEmployee.length;
+        this._employeeTable.endData = (endIndex > (this._employeeTable.totalData || 0)) ? this._employeeTable.totalData : endIndex;
+    }
 
     //#endregion
 }

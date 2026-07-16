@@ -1,23 +1,27 @@
 <div class="div-table-footer">
     <div class="div-table-left-footer">
-        <p class="p-table-information">Showing 1-10 of 14 data</p>
+        <p class="p-table-information">Showing {{ _modelTable?.startData }}-{{ _modelTable?.endData }} of {{ _modelTable?.totalData }} data</p>
     </div>
     <div class="div-table-right-footer">
         <button
-            class="button-general button-process button-light icon-caret-left"
-            type="button" [ngClass]="{'button-light': !_arrayNavButton[0].active}">
+            class="button-general button-light icon-caret-left"
+            type="button"
+            [disabled]="_modelTable?.currentPage == 1"
+            [ngClass]="{'button-process':_modelTable?.currentPage != 1}"
+            (click)="goToPrevPage()">
         </button>
-        @for (navButton of _arrayNavButton; track $index)
-        {
-            <button
-                class="button-general button-process button-light button-nav-table"
-                type="button" [ngClass]="{'button-light': !navButton.active}">
-                {{ navButton.number }}
-            </button>
-        }
         <button
-            class="button-general button-process icon-caret-right"
-            type="button" [ngClass]="{'button-light': !_arrayNavButton[_arrayNavButton.length - 1].active}">
+            class="button-general button-light button-nav-table"
+            type="button"
+            [disabled]="true">
+            {{ _modelTable?.currentPage }}
+        </button>
+        <button
+            class="button-general button-light icon-caret-right"
+            type="button"
+            [disabled]="_modelTable?.currentPage == _modelTable?.totalPage"
+            [ngClass]="{'button-process':_modelTable?.currentPage != _modelTable?.totalPage}"
+            (click)="oToNextPage()">
         </button>
     </div>
 </div>

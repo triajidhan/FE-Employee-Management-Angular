@@ -30,7 +30,7 @@ import { Router } from '@angular/router';
 export class SigninComponent implements OnInit
 {
 
-    //#region ATTRIBUTES
+    //#region DECLARATION
 
     public formLogin!: FormGroup;
     public signinAdmin!: Signin;
