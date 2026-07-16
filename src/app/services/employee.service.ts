@@ -77,11 +77,11 @@ export class EmployeeService
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(currentList));
     }
 
-    public deleteEmployee(index: number): void
+    public deleteEmployeeByUsername(username: string): void
     {
         const currentList = this.getAllEmployees();
-        currentList.splice(index, 1)
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(currentList));
+        const updatedList = currentList.filter(employee => employee.username !== username);
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(updatedList));
     }
 
     //#endregion

@@ -95,19 +95,17 @@ export class EmployeeListComponent implements OnInit
             if (this._formSearchEmployee.errors?.['requireOne'])
             {
                 alert("Gagal mencari! Harap isi salah satu kolom (Nama atau Email) terlebih dahulu.");
-                return;
             }
             else if (this.fcSearchEmployee['name'].errors?.['pattern']) {
                 alert("Kolom NAMA kurang dari 3 karakter! Silakan tambah huruf pencarian Anda.");
-                return;
             }
             else if (this.fcSearchEmployee['email'].errors?.['pattern']) {
                 alert("Kolom EMAIL kurang dari 3 karakter! Silakan tambah huruf pencarian Anda.");
-                return;
             }
             return;
         }
 
+        this._employeeTable.currentPage = 1;
         const strName = this._formSearchEmployee.value.name?.toLowerCase().trim();
         const strEmail = this._formSearchEmployee.value.email?.toLowerCase().trim();
 
@@ -131,7 +129,7 @@ export class EmployeeListComponent implements OnInit
     {
         this._formSearchEmployee.reset();
         this._booleanSubmitSearch = false;
-        
+
         this.callGetAllEmployee(); 
     }
 
@@ -161,8 +159,8 @@ export class EmployeeListComponent implements OnInit
         }
         else
         {
-            const filteredArrayEmployeee = arrayEmployee.filter((employee) => {
-                
+            const filteredArrayEmployeee = arrayEmployee.filter((employee) =>
+            {    
                 const fullName = `${employee.firstName} ${employee.lastName}`.toLowerCase();
                 const employeeEmail = employee.email?.toLowerCase() || '';
 
@@ -176,6 +174,19 @@ export class EmployeeListComponent implements OnInit
             this._employeeTable.totalPage = Math.ceil(filteredArrayEmployeee.length / limit);
             this._employeeTable.totalData = filteredArrayEmployeee.length;
             this._employeeTable.endData = (endIndex > (this._employeeTable.totalData || 0)) ? this._employeeTable.totalData : endIndex;
+        }
+    }
+
+    public callDeleteEmployeeByUsername(username?: string, name?: string): void
+    {    
+        const konfirmasi = confirm(`Apakah Anda yakin ingin menghapus karyawan: ${name}?`);
+
+        if (konfirmasi && username)
+        {
+            this.employeeService.deleteEmployeeByUsername(username);
+            this.callGetAllEmployee();
+
+            alert('Data karyawan berhasil dihapus!');
         }
     }
 
