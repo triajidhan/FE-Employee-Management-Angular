@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Signin } from '../../interfaces/signin';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 //#endregion
 
@@ -41,7 +42,12 @@ export class SigninComponent implements OnInit
 
     //#region CONSTRUCTOR
 
-    constructor(private formBuilder: FormBuilder, private router: Router)
+    constructor
+    (
+        private toastr: ToastrService,
+        private formBuilder: FormBuilder,
+        private router: Router
+    )
     {
         this._booleanSubmitted = false;
     }
@@ -110,7 +116,7 @@ export class SigninComponent implements OnInit
         }
         else
         {
-            alert(`Selamat Datang, ${this._formLogin.value.username}!`);
+            this.toastr.success(`Selamat Datang, ${this._formLogin.value.username}!`, "Sukses");
             this.router.navigate(["/home/dashboard"]);
         }
 

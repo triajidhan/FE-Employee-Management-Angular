@@ -2,6 +2,7 @@
 
 @import ../scss/initialization-general
 @import vendor-prefix-general
+@import responsive-general
 
 /* IMPORT - END */
 
@@ -30,6 +31,8 @@ select.select-general
     
 input.input-search
     max-width: 170px
+    @include respond-to(laptop)
+        max-width: 120px
 
 textarea.textarea-general
     resize: none

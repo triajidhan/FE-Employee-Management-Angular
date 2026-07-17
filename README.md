@@ -1,4 +1,4 @@
-# FEEmployeeManagementAngular
+# Employee Management System
 
 Proyek ini dibangun menggunakan **Angular CLI** versi 18.2.21 untuk mengelola data data karyawan (*Employee Management*).
 
@@ -49,7 +49,7 @@ Buka browser Anda dan akses tautan **`http://localhost:4200/`**. Aplikasi akan o
 
 Aplikasi ini dilengkapi dengan fitur autentikasi. Untuk masuk ke dalam sistem dashboard manajemen, gunakan akun *dummy* berikut:
 
-* **Username / Email :** `superadmin`
+* **Username :** `superadmin`
 * **Password :** `super_admin`
 
 ---

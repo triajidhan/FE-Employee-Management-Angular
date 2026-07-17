@@ -1,3 +1,5 @@
+@import "../../../../public/assets/styles/sass/responsive-general.sass";
+
 div.div-signin-container
 {
     display: grid;
@@ -31,6 +33,20 @@ div.div-signin-container
             {
                 width: 100%;
             }
+        }
+    }
+
+    @include respond-to(laptop)
+    {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @include respond-to(tablet)
+    {
+        grid-template-columns: 1fr;
+        div.div-signin-image-container
+        {
+            display: none;
         }
     }
 }
