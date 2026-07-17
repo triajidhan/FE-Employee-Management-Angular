@@ -1,0 +1,36 @@
+<div class="div-select-container">
+    <i class="i-icon i-icon-input icon-caret-down" [ngClass]="{'i-rotate-icon-180': _booleanSelectOpen && !readonly}"></i>
+    <p class="p-select" [ngClass]="{'p-select-hide': _stringInput}">{{ _stringSelectedOption }}</p>
+    <div class="div-select-click" (click)="onClickToFocus()"
+        [ngClass]="{'div-select-click-hide': _booleanSelectOpen}">
+        <i class="i-icon i-icon-input icon-caret-down"></i>
+        <p class="p-select" [ngClass]="{'p-select-hide': _stringInput}">{{ _stringSelectedOption }}</p>
+    </div>
+    <input #selectInput class="input-general" type="text"
+        [placeholder]="_stringSelectedOption ? '' : placeholder"
+        (focus)="onFocus(); onInputFilterList($event)"
+        (blur)="onBlur($event)"
+        [(ngModel)]="_stringInput"
+        (input)="onInputFilterList($event)"
+        [disabled]="disabled"
+        [readonly]="readonly">
+    @if (!readonly)
+    {
+        <div class="div-option-container"
+            [ngStyle]="{height: getHeightOptionContainer()}">
+            @for (item of _arrayFilteredItems; track item.id; let numberIndex = $index)
+            {
+                <div class="div-option" (click)="onClickOption(item)" tabindex="{{ numberIndex }}"
+                    [ngClass]="{'div-option-selected': item.name === _stringSelectedOption}">
+                    <span class="span-option">{{ item.name }}</span>
+                </div>
+            }
+            @empty
+            {
+                <div class="div-option div-option-disabled">
+                    <span class="span-option">No Data Selected</span>
+                </div>
+            }
+        </div>
+    }
+</div>

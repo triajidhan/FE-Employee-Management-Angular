@@ -1,0 +1,51 @@
+<h2>Employee Form</h2>
+
+<div class="div-container-form">
+    <section class="section-card">
+        <form [formGroup]="_formEmployee" (ngSubmit)="onSubmit()">
+            <div class="div-container-two-column">
+                <div>
+                    <label class="label-input" for="input-username">Username</label>
+                    <input class="input-general" formControlName="username" type="text" id="input-username" name="input-username" placeholder="Input Username">
+    
+                    <label class="label-input" for="input-firstname">First Name</label>
+                    <input class="input-general" formControlName="firstName" type="text" id="input-firstname" name="input-firstname" placeholder="Input First Name">
+    
+                    <label class="label-input" for="input-lastname">Last Name</label>
+                    <input class="input-general" formControlName="lastName" type="text" id="input-lastname" name="input-lastname" placeholder="Input Last Name">
+    
+                    <label class="label-input" for="input-email">Email</label>
+                    <input class="input-general" formControlName="email" type="email" id="input-email" name="input-email"
+                        placeholder="Input Email">
+    
+                    <label class="label-input" for="input-birth-date">Birth Date</label>
+                    <app-inputdate (dateChange)="onDateChange($event)" [maxDate]="_currentDate">
+                    </app-inputdate>
+    
+                </div>
+                <div>
+                    <label class="label-input" for="input-basic-salary">Basic Salary</label>
+                    <input class="input-general" formControlName="basicSalary" type="number" id="input-basic-salary" name="input-basic-salary"
+                        placeholder="Input Basic Salary">
+    
+                    <label class="label-input" for="input-select-group">Group</label>
+                    <app-inputselect
+                        [items]="_arraySelectItem"
+                        [selectedItemId]="_formEmployee.get('group')?.value"
+                        (selectionChange)="onGroupChange($event)">
+                    </app-inputselect>
+                    
+                    <label class="label-input" for="textarea-description">Description</label>
+                    <textarea class="textarea-general" formControlName="description" name="textarea-description" id="textarea-description"
+                        placeholder="Input Description" rows="4"></textarea>
+    
+                </div>
+            </div>
+
+            <div class="div-button-container-right">
+                <button class="button-general button-danger"type="button" (click)="goToList()">Cancel</button>
+                <button class="button-general button-process" type="submit">Save</button>
+            </div>
+        </form>
+    </section>
+</div>

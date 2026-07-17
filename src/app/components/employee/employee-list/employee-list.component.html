@@ -17,15 +17,15 @@
                     </div>
     
                     <div class="div-search-button-container">
-                        <button id="button-process" class="button-general button-process button-light icon-magnifying-glass" type="submit"></button>
-                        <button id="button-process" class="button-general button-process button-light icon-rotate" type="button" (click)="clearSearch()"></button>
+                        <button id="button-submit" class="button-general button-process button-light icon-magnifying-glass" type="submit"></button>
+                        <button id="button-clear" class="button-general button-process button-light icon-rotate" type="button" (click)="clearSearch()"></button>
                     </div>
                     
                 </form>
             </div>
             <div class="div-table-right-header">
-                <button id="button-process" class="button-general button-success button-right-icon icon-plus" type="button">Add
-                    Data</button>
+                <button id="button-process" class="button-general button-success button-right-icon icon-plus" type="button"
+                    (click)="goToInsert()">Add Data</button>
             </div>
         </div>
 
@@ -47,11 +47,11 @@
                         @for (dataTable of _arrayModelEmployee; track dataTable.username; let numberIndex = $index)
                         {
                         <tr>
-                            <td class="td-index-number">{{ (_employeeTable.startData ?? 0) + numberIndex }}</td>
-                            <td>{{ dataTable.firstName }} {{ dataTable.lastName }}</td>
-                            <td>{{ dataTable.email }}</td>
-                            <td>{{ dataTable.birthDate | date: "dd MMMM yyyy" }}</td>
-                            <td>{{ dataTable.group }}</td>
+                            <td (click)="goToDetail(dataTable.username)" class="td-index-number td-pointer">{{ (_employeeTable.startData ?? 0) + numberIndex }}</td>
+                            <td (click)="goToDetail(dataTable.username)" class="td-pointer">{{ dataTable.firstName }} {{ dataTable.lastName }}</td>
+                            <td (click)="goToDetail(dataTable.username)" class="td-pointer">{{ dataTable.email }}</td>
+                            <td (click)="goToDetail(dataTable.username)" class="td-pointer">{{ dataTable.birthDate | date: "dd MMMM yyyy" }}</td>
+                            <td (click)="goToDetail(dataTable.username)" class="td-pointer">{{ dataTable.group }}</td>
                             <td class="td-status">
                                 <div class="div-status-container">
                                     <div class="div-status"

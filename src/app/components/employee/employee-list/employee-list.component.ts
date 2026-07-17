@@ -191,4 +191,19 @@ export class EmployeeListComponent implements OnInit
     }
 
     //#endregion
+
+
+    //#region NAVIGATION
+
+    public goToInsert(): void
+    {
+        this.router.navigate(["home", "employee", "insert"]);
+    }
+
+    public goToDetail(username?: string): void
+    {
+        this.router.navigate(["home", "employee","detail", username]);
+    }
+
+    //#endregion
 }

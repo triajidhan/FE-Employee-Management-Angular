@@ -1,0 +1,62 @@
+div.div-select-container
+    ::-webkit-scrollbar-thumb
+        visibility: visible
+    position: relative
+    div.div-select-click
+        p.p-select,
+        i.i-icon-input
+            opacity: 0
+    div.div-select-click-hide
+        display: none
+    p.p-select
+        position: absolute
+        left: 15px
+        top: 8px
+    p.p-select-hide
+        display: none
+    i.i-icon-input
+        cursor: pointer
+        position: absolute
+        right: 12.5px
+        top: 8px
+    input.input-general
+        padding-right: 45px
+    div.div-option-container
+        overflow: hidden
+        background-color: #fff
+        width: 100%
+        display: grid
+        position: absolute
+        transition: box-shadow 1s ease-out
+        border-radius: 7.5px
+        div.div-option
+            cursor: pointer
+            padding: 5px 15px
+            &:hover
+                background-color: #f6ecff
+            &:hover span.span-option
+                display: block
+                transition: transform 0.25s
+                transform: translateX(5px)
+            &:first-child
+                margin-top: 5px
+            &:last-child
+                margin-bottom: 5px
+        div.div-option-disabled
+            &:hover
+                background-color: #fff
+            &:hover span.span-option
+                transform: none
+        div.div-option-selected
+            color: #ffffff
+            background-color: #8f0fff
+            &:hover
+                background-color: #8f0fff
+    input.input-general
+        &:focus + div.div-option-container
+            transition: height 0.25s
+            box-shadow: 0px 2px 3px 2px #d8d8dc
+            overflow-y: scroll
+        &:focus + i.i-icon-input
+            transform: rotate(180deg)
+

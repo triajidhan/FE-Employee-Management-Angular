@@ -78,8 +78,10 @@ export class InputdateComponent
     @Input() public disabled: boolean = false;
     @Input() public readonly: boolean = false;
     @Input() public date?: Date;
+    @Input() public maxDate?: Date;
 
     @Output() public dateChange = new EventEmitter<Date>();
+
 
     //#endregion
 

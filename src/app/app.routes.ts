@@ -31,7 +31,8 @@ export const routes: Routes =
                     },
                     {
                         path: "employee",
-                        component: EmployeeListComponent
+                        loadChildren: () => import("./components/employee/employee.module").then(pageModule => pageModule.EmployeeModule),
+
                     },
             ]
         },

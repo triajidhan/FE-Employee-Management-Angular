@@ -3,6 +3,7 @@
 import { NgModule } from "@angular/core";
 import { InputdateComponent } from "../components/bases/input/inputdate/inputdate.component";
 import { InputiconComponent } from "../components/bases/input/inputicon/inputicon.component";
+import { InputselectComponent } from "../components/bases/input/inputselect/inputselect.component";
 
 //#endregion
 
@@ -16,11 +17,13 @@ import { InputiconComponent } from "../components/bases/input/inputicon/inputico
     [
         InputdateComponent,
         InputiconComponent,
+        InputselectComponent,
     ],
         exports:
     [
         InputdateComponent,
         InputiconComponent,
+        InputselectComponent,
     ],
     }
 )
