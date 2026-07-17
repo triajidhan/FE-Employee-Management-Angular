@@ -26,7 +26,8 @@ export class EmployeeService
     //#region ATTRIBUTES
 
     private STORAGE_KEY = "employee_list";
-
+    private STORAGE_SEARCH_KEY = "employee_search";
+ 
     //#endregion
 
 
@@ -87,6 +88,17 @@ export class EmployeeService
         const currentList = this.getAllEmployees();
         const updatedList = currentList.filter(employee => employee.username !== username);
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(updatedList));
+    }
+
+    public saveKeyword(modelEmployee: EmployeeModel): void
+    {
+        localStorage.setItem(this.STORAGE_SEARCH_KEY, JSON.stringify(modelEmployee));
+    }
+
+    public getKeyword(): EmployeeModel
+    {
+        const dataString = localStorage.getItem(this.STORAGE_SEARCH_KEY);
+        return dataString ? JSON.parse(dataString) : "";
     }
 
     //#endregion

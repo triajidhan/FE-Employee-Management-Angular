@@ -35,7 +35,6 @@ export class EmployeeInsertComponent implements OnInit
 {
     //#region DECLARATION
 
-    private _toastr = inject(ToastrService);
     public _formEmployee!: FormGroup;
     public _arraySelectItem: Array<SelectItem>;
     public _currentDate: Date;
@@ -47,7 +46,14 @@ export class EmployeeInsertComponent implements OnInit
 
     //#region CONSTRUCTOR
 
-    constructor(private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private employeeService: EmployeeService)
+    constructor
+    (
+        private toastr: ToastrService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private formBuilder: FormBuilder,
+        private employeeService: EmployeeService
+    )
     {
         this._arraySelectItem = [];
         this._currentDate = new Date();
@@ -219,13 +225,13 @@ export class EmployeeInsertComponent implements OnInit
         {
             this.employeeService.updateEmployeeByUsername(newEmployeeData.username!, newEmployeeData);
 
-            this._toastr.warning(`Sukses! Data karyawan "${newEmployeeData.firstName}" berhasil diperbarui.`, 'Sukses');
+            this.toastr.warning(`Sukses! Data karyawan "${newEmployeeData.firstName}" berhasil diperbarui.`, 'Sukses');
         }
         else
         {
             this.employeeService.addEmployee(newEmployeeData);
     
-            this._toastr.success(`Sukses! Karyawan "${newEmployeeData.firstName}" berhasil didaftarkan.`, 'Sukses');
+            this.toastr.success(`Sukses! Karyawan "${newEmployeeData.firstName}" berhasil didaftarkan.`, 'Sukses');
         }
         
         this.goToList();

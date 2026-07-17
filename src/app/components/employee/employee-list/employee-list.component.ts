@@ -18,7 +18,6 @@ export class EmployeeListComponent implements OnInit
 {
     //#region DECLARATION
     
-    private _toastr = inject(ToastrService);
     public _formSearchEmployee!: FormGroup;
     public _employeeTable: TableModel;
     public _booleanSubmitSearch: boolean;
@@ -29,7 +28,13 @@ export class EmployeeListComponent implements OnInit
 
     //#region CONSTRUCTOR
 
-    constructor(private formBuilder: FormBuilder, private router: Router, private employeeService: EmployeeService)
+    constructor
+    (
+        private toastr: ToastrService,
+        private formBuilder: FormBuilder,
+        private router: Router,
+        private employeeService: EmployeeService
+    )
     {
         this._employeeTable = new TableModel;
         this._booleanSubmitSearch = false;
@@ -43,8 +48,19 @@ export class EmployeeListComponent implements OnInit
 
     ngOnInit(): void
     {
-        this.setFormSearchEmployee();
-        this.callGetAllEmployee();
+        let modelEmployee = new EmployeeModel();
+        modelEmployee = this.employeeService.getKeyword()
+
+        if (modelEmployee.email || modelEmployee.firstName)
+        {
+            this.callGetAllEmployee(modelEmployee.firstName, modelEmployee.email);
+            this.setFormSearchEmployee(modelEmployee.firstName, modelEmployee.email);
+        }
+        else
+        {
+            this.callGetAllEmployee();
+            this.setFormSearchEmployee();
+        }
     }
 
     //#endregion
@@ -52,13 +68,13 @@ export class EmployeeListComponent implements OnInit
 
     //#region SETTER
 
-    private setFormSearchEmployee(): void
+    private setFormSearchEmployee(strName?: string, strEmail?: string): void
     {
         this._formSearchEmployee = this.formBuilder.group
         (
             {
-                name: ["", [Validators.pattern(/^(.{3,})?$/)]],
-                email: ["", [Validators.pattern(/^(.{3,})?$/)]]
+                name: [strName ?? "", [Validators.pattern(/^(.{3,})?$/)]],
+                email: [strEmail ?? "", [Validators.pattern(/^(.{3,})?$/)]]
             },
             {
                 validators: this.atLeastOneFilled
@@ -159,9 +175,10 @@ export class EmployeeListComponent implements OnInit
 
     //#region SERVICE
 
-    public callGetAllEmployee(strName?: string, strEmployee?: string): void
+    public callGetAllEmployee(strName?: string, strEmail?: string): void
     {
         const arrayEmployee = this.employeeService.getAllEmployees();
+        const modelEmployee = new EmployeeModel();
 
         const limit = this._employeeTable.pagination || 20;
         const page = this._employeeTable.currentPage || 1;
@@ -171,12 +188,17 @@ export class EmployeeListComponent implements OnInit
         
         this._employeeTable.startData = startIndex + 1;
         
-        if (!strName && !strEmployee)
+        if (!strName && !strEmail)
         {
             this._arrayModelEmployee = arrayEmployee.slice(startIndex, endIndex);
             this._employeeTable.totalPage = Math.ceil(arrayEmployee.length / limit);
             this._employeeTable.totalData = arrayEmployee.length;
             this._employeeTable.endData = (endIndex > (this._employeeTable.totalData || 0)) ? this._employeeTable.totalData : endIndex;
+
+            modelEmployee.firstName = "";
+            modelEmployee.email = "";
+
+            this.employeeService.saveKeyword(modelEmployee);
         }
         else
         {
@@ -186,7 +208,7 @@ export class EmployeeListComponent implements OnInit
                 const employeeEmail = employee.email?.toLowerCase() || '';
 
                 const matchName = strName ? fullName.includes(strName) : true;
-                const matchEmail = strEmployee ? employeeEmail.includes(strEmployee) : true;
+                const matchEmail = strEmail ? employeeEmail.includes(strEmail) : true;
 
                 return matchName && matchEmail;
             });
@@ -195,6 +217,11 @@ export class EmployeeListComponent implements OnInit
             this._employeeTable.totalPage = Math.ceil(filteredArrayEmployeee.length / limit);
             this._employeeTable.totalData = filteredArrayEmployeee.length;
             this._employeeTable.endData = (endIndex > (this._employeeTable.totalData || 0)) ? this._employeeTable.totalData : endIndex;
+
+            modelEmployee.firstName = strName;
+            modelEmployee.email = strEmail;
+
+            this.employeeService.saveKeyword(modelEmployee);
         }
     }
 
@@ -207,7 +234,7 @@ export class EmployeeListComponent implements OnInit
             this.employeeService.deleteEmployeeByUsername(username);
             this.callGetAllEmployee();
 
-            this._toastr.error("Data karyawan berhasil dihapus!", "Sukses");
+            this.toastr.error("Data karyawan berhasil dihapus!", "Sukses");
         }
     }
 
