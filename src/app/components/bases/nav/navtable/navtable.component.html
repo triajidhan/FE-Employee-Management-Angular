@@ -23,5 +23,11 @@
             [ngClass]="{'button-process':_modelTable?.currentPage != _modelTable?.totalPage}"
             (click)="oToNextPage()">
         </button>
+
+        <app-inputselect style="width: 80px;"
+            [items]="_arraySelectItemRow"
+            [selectedItemId]="20"
+            (selectionChange)="onPaginationChange($event)">
+        </app-inputselect>
     </div>
 </div>

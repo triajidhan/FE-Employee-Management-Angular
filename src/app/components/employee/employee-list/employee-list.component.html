@@ -81,7 +81,8 @@
 
         <app-navtable
             [_modelTable]="_employeeTable"
-            (pageChange)="onPageChange($event)">
+            (pageChange)="onPageChange($event)"
+            (paginationChange)="onPaginationChange($event)">
         </app-navtable>
     </section>
 </div>

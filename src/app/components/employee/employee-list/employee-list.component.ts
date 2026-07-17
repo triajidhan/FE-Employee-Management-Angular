@@ -86,6 +86,25 @@ export class EmployeeListComponent implements OnInit
         }
     }
 
+    public onPaginationChange(newPagination: number): void
+    {
+        if (this._employeeTable)
+        {
+            if (this._employeeTable.pagination! < newPagination)
+            {
+                const maxPages = Math.ceil(this._employeeTable.totalData! / newPagination);
+
+                if (this._employeeTable.currentPage! > maxPages)
+                {
+                    this._employeeTable.currentPage = maxPages;
+                }
+            }
+            
+            this._employeeTable.pagination = newPagination;
+            this.callGetAllEmployee();
+        }
+    }
+
     public onSearch(): void
     {
         this._booleanSubmitSearch = true;

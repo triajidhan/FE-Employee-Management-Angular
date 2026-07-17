@@ -3,6 +3,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { InputselectComponent } from "../../components/bases/input/inputselect/inputselect.component";
 
 //#endregion
 
@@ -16,11 +17,13 @@ import { FormsModule } from "@angular/forms";
     [
         CommonModule,
         FormsModule,
+        InputselectComponent,
     ],
         exports:
     [
         CommonModule,
         FormsModule,
+        InputselectComponent,
     ],
     }
 )
