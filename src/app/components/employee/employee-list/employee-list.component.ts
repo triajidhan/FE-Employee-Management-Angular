@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { BaseModule } from '../../../modules/bases/base.module';
 import { Router } from '@angular/router';
 import { EmployeeModel } from '../../../models/employee.model';
 import { EmployeeService } from '../../../services/employee.service';
 import { TableModel } from '../../../models/table.model';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-list',
@@ -17,6 +18,7 @@ export class EmployeeListComponent implements OnInit
 {
     //#region DECLARATION
     
+    private _toastr = inject(ToastrService);
     public _formSearchEmployee!: FormGroup;
     public _employeeTable: TableModel;
     public _booleanSubmitSearch: boolean;
@@ -205,7 +207,7 @@ export class EmployeeListComponent implements OnInit
             this.employeeService.deleteEmployeeByUsername(username);
             this.callGetAllEmployee();
 
-            alert('Data karyawan berhasil dihapus!');
+            this._toastr.error("Data karyawan berhasil dihapus!", "Sukses");
         }
     }
 

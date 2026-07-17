@@ -1,6 +1,6 @@
 //#region IMPORT
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { BaseModule } from '../../../modules/bases/base.module';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { SelectItem } from '../../../interfaces/selectitem';
 import { ARRAY_GROUPS } from '../../../constants/group.constant';
 import { EmployeeModel } from '../../../models/employee.model';
 import { EmployeeService } from '../../../services/employee.service';
+import { ToastrService } from 'ngx-toastr'
 
 //#endregion
 
@@ -34,6 +35,7 @@ export class EmployeeInsertComponent implements OnInit
 {
     //#region DECLARATION
 
+    private _toastr = inject(ToastrService);
     public _formEmployee!: FormGroup;
     public _arraySelectItem: Array<SelectItem>;
     public _currentDate: Date;
@@ -217,13 +219,13 @@ export class EmployeeInsertComponent implements OnInit
         {
             this.employeeService.updateEmployeeByUsername(newEmployeeData.username!, newEmployeeData);
 
-            alert(`Sukses! Data karyawan "${newEmployeeData.firstName}" berhasil diperbarui.`);
+            this._toastr.warning(`Sukses! Data karyawan "${newEmployeeData.firstName}" berhasil diperbarui.`, 'Sukses');
         }
         else
         {
             this.employeeService.addEmployee(newEmployeeData);
     
-            alert(`Sukses! Karyawan "${newEmployeeData.firstName}" berhasil didaftarkan.`);
+            this._toastr.success(`Sukses! Karyawan "${newEmployeeData.firstName}" berhasil didaftarkan.`, 'Sukses');
         }
         
         this.goToList();
