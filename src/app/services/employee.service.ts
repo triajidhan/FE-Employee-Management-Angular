@@ -70,11 +70,16 @@ export class EmployeeService
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(currentList));
     }
 
-    public updateEmployee(index: number, employeeUpdate: EmployeeModel): void
+    public updateEmployeeByUsername(username: string, updatedData: EmployeeModel): void
     {
         const currentList = this.getAllEmployees();
-        currentList[index] = employeeUpdate;
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(currentList));
+        const targetIndex = currentList.findIndex(emp => emp.username === username);
+
+        if (targetIndex !== -1)
+        {
+            currentList[targetIndex] = updatedData;
+            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(currentList));
+        }
     }
 
     public deleteEmployeeByUsername(username: string): void

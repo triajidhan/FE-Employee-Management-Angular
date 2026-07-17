@@ -20,6 +20,10 @@ const arrayRoutes: Routes = [
         component: EmployeeInsertComponent
     },
     {
+        path: "update/:username",
+        component: EmployeeInsertComponent
+    },
+    {
         path: "detail/:username",
         component: EmployeeDetailComponent
     }

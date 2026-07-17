@@ -19,7 +19,10 @@
                         placeholder="Input Email">
     
                     <label class="label-input" for="input-birth-date">Birth Date</label>
-                    <app-inputdate (dateChange)="onDateChange($event)" [maxDate]="_currentDate">
+                    <app-inputdate
+                        (dateChange)="onDateChange($event)"
+                        [maxDate]="_currentDate"
+                        [date]="_formEmployee.get('birthDate')?.value">
                     </app-inputdate>
     
                 </div>
@@ -44,7 +47,14 @@
 
             <div class="div-button-container-right">
                 <button class="button-general button-danger"type="button" (click)="goToList()">Cancel</button>
-                <button class="button-general button-process" type="submit">Save</button>
+                @if (_booleanUpdatePage)
+                {
+                    <button class="button-general button-warning" type="submit">Update</button>
+                }
+                @else
+                {
+                    <button class="button-general button-process" type="submit">Save</button>
+                }
             </div>
         </form>
     </section>

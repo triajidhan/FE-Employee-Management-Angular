@@ -73,7 +73,8 @@ export class EmployeeDetailComponent implements OnInit
 
     //#region NAVIGATION
 
-    public goToList(): void {
+    public goToList(): void
+    {
         this.router.navigate(["home", "employee"]);
     }
 

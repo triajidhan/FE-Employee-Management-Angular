@@ -3,7 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseModule } from '../../../modules/bases/base.module';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SelectItem } from '../../../interfaces/selectitem';
 import { ARRAY_GROUPS } from '../../../constants/group.constant';
 import { EmployeeModel } from '../../../models/employee.model';
@@ -37,16 +37,20 @@ export class EmployeeInsertComponent implements OnInit
     public _formEmployee!: FormGroup;
     public _arraySelectItem: Array<SelectItem>;
     public _currentDate: Date;
+    public _booleanUpdatePage: boolean;
+    public _employeeModel: EmployeeModel;
 
     //#endregion
 
 
     //#region CONSTRUCTOR
 
-    constructor(private router: Router, private formBuilder: FormBuilder, private employeeService: EmployeeService)
+    constructor(private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private employeeService: EmployeeService)
     {
         this._arraySelectItem = [];
         this._currentDate = new Date();
+        this._booleanUpdatePage = false;
+        this._employeeModel = new EmployeeModel();
     }
 
     //#endregion
@@ -57,6 +61,7 @@ export class EmployeeInsertComponent implements OnInit
     ngOnInit(): void
     {
         this.setFormEmployee();
+        this.checkPage();
         this.setArraySelectItem();
     }
 
@@ -102,6 +107,28 @@ export class EmployeeInsertComponent implements OnInit
 
 
     //#region FUNCTION
+
+    private checkPage(): void
+    {
+        const usernameFromUrl = this.route.snapshot.paramMap.get('username');
+
+        if (usernameFromUrl)
+        {
+            this._booleanUpdatePage = true;
+            this.fillFormForUpdate(usernameFromUrl);
+        }
+    }
+
+    private fillFormForUpdate(username: string): void {
+        const allEmployees = this.employeeService.getAllEmployees();
+        const employeeData = allEmployees.find(emp => emp.username === username);
+
+        if (employeeData)
+        {
+            this._formEmployee.get('username')?.disable();
+            this._formEmployee.patchValue(employeeData);
+        }
+    }
 
     public onDateChange(newDate: Date): void
     {
@@ -184,10 +211,21 @@ export class EmployeeInsertComponent implements OnInit
             return;
         }
         
-        const newEmployeeData: EmployeeModel = this._formEmployee.value;
-        this.employeeService.addEmployee(newEmployeeData);
+        const newEmployeeData: EmployeeModel = this._formEmployee.getRawValue();
 
-        alert(`Sukses! Karyawan "${newEmployeeData.firstName}" berhasil didaftarkan.`);
+        if (this._booleanUpdatePage)
+        {
+            this.employeeService.updateEmployeeByUsername(newEmployeeData.username!, newEmployeeData);
+
+            alert(`Sukses! Data karyawan "${newEmployeeData.firstName}" berhasil diperbarui.`);
+        }
+        else
+        {
+            this.employeeService.addEmployee(newEmployeeData);
+    
+            alert(`Sukses! Karyawan "${newEmployeeData.firstName}" berhasil didaftarkan.`);
+        }
+        
         this.goToList();
     }
 

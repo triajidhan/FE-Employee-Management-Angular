@@ -74,14 +74,33 @@ export class InputdateComponent
 {
     //#region DECLARATION
 
+
+    @Input()
+    public set date(value: any) {
+        if (value) {
+            this._date = value instanceof Date ? value : new Date(value);
+        } else {
+            this._date = undefined;
+        }
+    }
     @Input() public placeholder: string = "Select Date";
     @Input() public disabled: boolean = false;
     @Input() public readonly: boolean = false;
-    @Input() public date?: Date;
     @Input() public maxDate?: Date;
 
     @Output() public dateChange = new EventEmitter<Date>();
 
+    private _date?: Date;
+
+    //#endregion
+
+
+    //#region GETTER
+
+    public get date(): Date | undefined
+    {
+        return this._date;
+    }
 
     //#endregion
 

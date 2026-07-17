@@ -200,6 +200,11 @@ export class EmployeeListComponent implements OnInit
         this.router.navigate(["home", "employee", "insert"]);
     }
 
+    public goToupdate(username?: string): void
+    {
+        this.router.navigate(["home", "employee", "update", username]);
+    }
+
     public goToDetail(username?: string): void
     {
         this.router.navigate(["home", "employee","detail", username]);

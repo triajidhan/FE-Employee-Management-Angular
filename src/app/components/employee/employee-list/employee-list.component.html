@@ -66,7 +66,8 @@
                             </td>
                             <td class="td-action">
                                 <div class="div-td-button-container">
-                                    <button id="button-update{{numberIndex}}" class="button-general button-warning icon-pen button-rounded" type="button"></button>
+                                    <button id="button-update{{numberIndex}}" class="button-general button-warning icon-pen button-rounded" type="button"
+                                        (click)="goToupdate(dataTable.username)"></button>
                                     <button id="button-delete{{numberIndex}}" class="button-general button-danger icon-trash-can button-rounded" type="button"
                                         (click)="callDeleteEmployeeByUsername(dataTable.username, dataTable.firstName + ' ' + dataTable.lastName )"></button>
                                 </div>
