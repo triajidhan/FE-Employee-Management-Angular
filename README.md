@@ -1,27 +1,55 @@
 # FEEmployeeManagementAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+Proyek ini dibangun menggunakan **Angular CLI** versi 18.2.21 untuk mengelola data data karyawan (*Employee Management*).
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🛠️ Daftar Teknologi & Dependensi Utama
 
-## Code scaffolding
+Untuk mendukung performa dan antarmuka aplikasi, proyek ini menggunakan beberapa pustaka utama berikut:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* **Angular Material (`^18.2.14`)**: Pustaka ini digunakan secara **spesifik dan terbatas hanya untuk komponen Datepicker** guna memastikan pemilihan tanggal lahir karyawan berjalan dengan mulus.
+* **ngx-toastr (`^19.1.0`)**: Digunakan untuk mengelola pop-up notifikasi (seperti pesan sukses, error, atau peringatan) secara reaktif.
+* **Vanilla SASS / SCSS**: Selain komponen *Datepicker* di atas, seluruh komponen antarmuka, tata letak (*layout*), dan elemen visual lainnya **didisain secara manual dari awal menggunakan SASS murni** (tanpa bantuan framework CSS seperti Bootstrap atau Tailwind) untuk menghasilkan performa yang ringan dan struktur kode CSS yang bersih.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## 🚀 Cara Menjalankan Aplikasi
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Ikuti langkah-langkah berikut untuk menjalankan aplikasi di komputer lokal Anda:
 
-## Running end-to-end tests
+### 1. Prasyarat (Prerequisites)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Pastikan Anda sudah menginstal **Node.js** (Disarankan versi LTS sesuai dengan Angular 18) dan **npm** di komputer Anda.
 
-## Further help
+### 2. Instalasi Dependensi
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Buka terminal di dalam folder proyek ini, lalu jalankan perintah berikut untuk mengunduh semua pustaka yang dibutuhkan:
+
+```bash
+npm install
+```
+
+*(Catatan: Jika terjadi konflik versi peer-dependencies pada package tertentu seperti ngx-toastr, gunakan perintah `npm install --legacy-peer-deps`)*
+
+### 3. Menjalankan Development Server
+
+Untuk mengaktifkan server lokal, jalankan perintah:
+
+```bash
+ng serve
+```
+
+Buka browser Anda dan akses tautan **`http://localhost:4200/`**. Aplikasi akan otomatis memuat ulang (*reload*) setiap kali Anda melakukan perubahan pada file kode sumber.
+
+---
+
+## 🔐 Akun Uji Coba (Dummy User Login)
+
+Aplikasi ini dilengkapi dengan fitur autentikasi. Untuk masuk ke dalam sistem dashboard manajemen, gunakan akun *dummy* berikut:
+
+* **Username / Email :** `superadmin`
+* **Password :** `super_admin`
+
+---
