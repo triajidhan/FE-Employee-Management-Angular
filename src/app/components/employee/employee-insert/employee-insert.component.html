@@ -41,6 +41,21 @@
                     <label class="label-input" for="textarea-description">Description</label>
                     <textarea class="textarea-general" formControlName="description" name="textarea-description" id="textarea-description"
                         placeholder="Input Description" rows="4"></textarea>
+
+                    @if (_booleanUpdatePage)
+                    {
+                        <label class="label-input" for="status">Status</label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" value="Active" name="status" formControlName="status" />
+                                Active
+                            </label>
+                            <label>
+                                <input type="radio" value="Inactive" name="status" formControlName="status" />
+                                Inactive
+                            </label>
+                        </div>
+                    }
     
                 </div>
             </div>
