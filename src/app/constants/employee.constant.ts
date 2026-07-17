@@ -37,6 +37,7 @@ export function initializeDummyData(): void
             employee.basicSalary = 5700000;
             employee.status = "Active";
             employee.group = ARRAY_GROUPS[randomIndex];
+            employee.description = "Lorem Ipsum dolor sit amet generator untuk membuat dummy";
 
             ARRAY_EMPLOYEES.push(employee);
         }

@@ -38,7 +38,6 @@ export class EmployeeInsertComponent implements OnInit
     public _arraySelectItem: Array<SelectItem>;
     public _currentDate: Date;
 
-
     //#endregion
 
 
@@ -152,8 +151,6 @@ export class EmployeeInsertComponent implements OnInit
 
             if (fieldsEmpty)
             {
-                console.log(this._formEmployee.value);
-                console.log(this._formEmployee.validator);
                 alert("Gagal Simpan: Data tidak boleh ada yang kosong! Mohon lengkapi semua kolom.");
                 return;
             }

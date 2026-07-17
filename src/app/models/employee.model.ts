@@ -9,5 +9,5 @@ export class EmployeeModel
     basicSalary?: number;
     status?: string;
     group?: string;
-    description?: Date;
+    description?: string;
 }

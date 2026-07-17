@@ -1,55 +1,40 @@
-<h2>Form</h2>
+<h2>Employee Detail</h2>
 
-<div class="div-container-two-column">
-    <div class="div-container-form">
-        <section class="section-card">
-            <h3>Default Input</h3>
-            <div class="div-data-group">
-                <p>
-                    Default style for input tags.
-                </p>
+<div class="div-container-form">
+    <section class="section-card">
+        <div class="div-container-two-column">
+            <div>
+                <label class="label-input">Username</label>
+                <p class="paragraph-detail">{{ _modelEmployee?.username }}</p>
+
+                <label class="label-input">First Name</label>
+                <p class="paragraph-detail">{{ _modelEmployee?.firstName }}</p>
+
+                <label class="label-input">Last Name</label>
+                <p class="paragraph-detail">{{ _modelEmployee?.lastName }}</p>
+
+                <label class="label-input">Email</label>
+                <p class="paragraph-detail">{{ _modelEmployee?.email }}</p>
+
+                <label class="label-input">Birth Date</label>
+                <p class="paragraph-detail">{{ _modelEmployee?.birthDate | date: "dd MMMM yyyy" }}</p>
+
             </div>
             <div>
-                <label class="label-input" for="input-default">Text</label>
-                <input class="input-general" type="text" id="input-default" name="input-default"
-                    placeholder="Input Text Data">
+                <label class="label-input">Basic Salary</label>
+                <p class="paragraph-detail">Rp {{ _modelEmployee?.basicSalary | numberPipe }},00</p>
 
-                <label class="label-input" for="input-email-default">Email</label>
-                <input class="input-general" type="email" id="input-email-default" name="input-email-default"
-                    placeholder="Input Email Data">
+                <label class="label-input">Group</label>
+                <p class="paragraph-detail">{{ _modelEmployee?.group }}</p>
 
-                <label class="label-input" for="input-number-default">Number</label>
-                <input class="input-general" type="number" id="input-number-default" name="input-number-default"
-                    placeholder="Input Number Data">
+                <label class="label-input">Description</label>
+                <p class="paragraph-detail">{{ _modelEmployee?.description }}</p>
 
-                <label class="label-input" for="input-password-default">Pasword</label>
-                <input class="input-general" type="password" id="input-password-default" name="input-pasword-default"
-                    placeholder="Input Password Data">
-
-                <!-- <label class="label-input" for="input-date-default">Date</label>
-                <app-inputdate (dateChange)="onDateChange($event)">
-                </app-inputdate>
-
-                <label class="label-input" for="input-date-range-default">Date Range</label>
-                <app-inputdaterange (dateRangeChange)="onDateRangeChange($event)">
-                </app-inputdaterange>
-
-                <label class="label-input" for="input-month-default">Month</label>
-                <app-inputmonth (dateChange)="onMonthChange($event)">
-                </app-inputmonth>
-
-                <label class="label-input" for="input-year-default">Year</label>
-                <app-inputyear (dateChange)="onMonthChange($event)">
-                </app-inputyear>
-
-                <label class="label-input" for="input-select-default">Select</label>
-                <app-inputselect [items]="_arraySelectItem" [selectedItemId]="_formInputData.selectedItemId">
-                </app-inputselect>
-
-                <label class="label-input" for="textarea-default">Textarea</label>
-                <textarea class="textarea-general" name="textarea-default" id="textarea-default" id="textarea-default"
-                    placeholder="Input Text Area Data" rows="5"></textarea> -->
             </div>
-        </section>
-    </div>
+        </div>
+
+        <div class="div-button-container-right">
+            <button class="button-general button-light" type="button" (click)="goToList()">Ok</button>
+        </div>
+    </section>
 </div>
